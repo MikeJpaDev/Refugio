@@ -2,10 +2,6 @@ package services
 import models.{Proveedor, ProveedorAlimento, ProveedorComplementario, Veterinario}
 import utils.DatabaseConnection
 
-import java.sql.SQLException
-import java.util.UUID
-import scala.util.{Failure, Try, Using}
-
 object ProveedorService {
   def getAllProveedor(): List[Proveedor] = DatabaseConnection.withConnection {conn =>
     val statement = conn.createStatement()
@@ -65,31 +61,5 @@ object ProveedorService {
           )
         }
       }).toList
-  }
-
-  def deleteProveedor(proveedorId: String): Try[Boolean] = {
-    Try(UUID.fromString(proveedorId)).flatMap { uuid =>
-      DatabaseConnection.withConnection { conn =>
-        val query = "SELECT * FROM public.delete_proveedor(?)"
-
-        Using(conn.prepareCall(query)) { stmt =>
-          stmt.setObject(1, uuid)
-          val rs = stmt.executeQuery()
-
-          if (rs.next()) {
-            true  // Se eliminó y devolvió el registro eliminado
-          } else {
-            false // No se encontró el proveedor
-          }
-        }
-      }
-    }.recover {
-      case e: SQLException if e.getSQLState == "23503" =>
-        throw new SQLException("No se puede eliminar - existen registros vinculados")
-      case e: SQLException =>
-        throw new SQLException(s"Error en base de datos: ${e.getMessage}")
-      case _: IllegalArgumentException =>
-        throw new SQLException(s"Formato de UUID inválido: $proveedorId")
-    }
   }
 }
