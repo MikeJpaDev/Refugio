@@ -5,6 +5,7 @@
 package src.gui;
 
 import java.awt.event.ActionEvent;
+import src.gui.dialogs.AnimalesDetails;
 
 /**
  *
@@ -229,7 +230,20 @@ public class Animales extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModActionPerformed
 
     private void btnDetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetActionPerformed
-        // TODO add your handling code here:
+        if (tableAnimales.getSelectedRow() != -1){
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    AnimalesDetails dialog = new AnimalesDetails(new javax.swing.JFrame(), true);
+                    dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                        @Override
+                        public void windowClosing(java.awt.event.WindowEvent e) {
+                            System.exit(0);
+                        }
+                    });
+                    dialog.setVisible(true);
+                }
+            });
+        }
     }//GEN-LAST:event_btnDetActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed

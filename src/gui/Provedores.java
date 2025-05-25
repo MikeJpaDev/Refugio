@@ -4,6 +4,8 @@
  */
 package src.gui;
 
+import src.gui.dialogs.ProvedoresDetails;
+
 /**
  *
  * @author Manuel Montero
@@ -224,7 +226,20 @@ public class Provedores extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCrear1ActionPerformed
 
     private void btnDetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetActionPerformed
-        // TODO add your handling code here:
+        if (tableProv.getSelectedRow() != -1) {
+            java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                ProvedoresDetails dialog = new ProvedoresDetails(new javax.swing.JFrame(), true);
+                    dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                        @Override
+                        public void windowClosing(java.awt.event.WindowEvent e) {
+                            System.exit(0);
+                        }
+                    });
+                    dialog.setVisible(true);
+                }
+            });
+        }
     }//GEN-LAST:event_btnDetActionPerformed
 
     private void btnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimActionPerformed
