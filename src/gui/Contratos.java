@@ -5,7 +5,7 @@
 package src.gui;
 
 import javax.swing.JOptionPane;
-import src.gui.dialogs.datails.ContratosDetails;
+import src.gui.dialogs.details.ContratosDetails;
 
 /**
  *

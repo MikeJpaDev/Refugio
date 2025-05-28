@@ -5,7 +5,7 @@
 package src.gui;
 
 import java.awt.event.ActionEvent;
-import src.gui.dialogs.datails.AnimalesDetails;
+import src.gui.dialogs.details.AnimalesDetails;
 
 /**
  *
