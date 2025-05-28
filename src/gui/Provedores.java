@@ -4,7 +4,7 @@
  */
 package src.gui;
 
-import src.gui.dialogs.datails.ProvedoresDetails;
+import src.gui.dialogs.details.ProvedoresDetails;
 
 /**
  *

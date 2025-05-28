@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package src.gui.dialogs.datails;
+package src.gui.dialogs.details;
 
 /**
  *
  * @author Manuel Montero
  */
-public class ProvedoresDetails extends javax.swing.JDialog {
+public class ContratosDetails extends javax.swing.JDialog {
 
     /**
-     * Creates new form ProvedoresDetails
+     * Creates new form ContratosDetails
      */
-    public ProvedoresDetails(java.awt.Frame parent, boolean modal) {
+    public ContratosDetails(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -33,59 +33,48 @@ public class ProvedoresDetails extends javax.swing.JDialog {
         jSeparator2 = new javax.swing.JSeparator();
         detailsContainer = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        lblNom = new javax.swing.JLabel();
+        lblIni = new javax.swing.JLabel();
         lblEtqNombre4 = new javax.swing.JLabel();
-        lblDir = new javax.swing.JLabel();
+        lblFin = new javax.swing.JLabel();
         lblEtqNombre6 = new javax.swing.JLabel();
-        lblTel = new javax.swing.JLabel();
+        lblConc = new javax.swing.JLabel();
         lblEtqNombre7 = new javax.swing.JLabel();
         lblEtqNombre8 = new javax.swing.JLabel();
-        lblProv = new javax.swing.JLabel();
-        lblEtqNombre9 = new javax.swing.JLabel();
-        lblTipo = new javax.swing.JLabel();
-        lblEsp = new javax.swing.JLabel();
-        lblEtqNombre11 = new javax.swing.JLabel();
-        lblEtqNombre12 = new javax.swing.JLabel();
-        lblMod = new javax.swing.JLabel();
+        lblPeso1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         btnAceptar1 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Ficha del Provedor");
+        jLabel1.setText("Ficha del Contrato");
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Detalles");
 
-        lblNom.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblIni.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
         lblEtqNombre4.setFont(new java.awt.Font("Arial", 2, 18)); // NOI18N
-        lblEtqNombre4.setText("Nombre:");
+        lblEtqNombre4.setText("Fecha Inicio: ");
 
-        lblDir.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblFin.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
         lblEtqNombre6.setFont(new java.awt.Font("Arial", 2, 18)); // NOI18N
-        lblEtqNombre6.setText("Dirección:");
+        lblEtqNombre6.setText("Fecha Fin: ");
 
-        lblTel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblConc.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
         lblEtqNombre7.setFont(new java.awt.Font("Arial", 2, 18)); // NOI18N
-        lblEtqNombre7.setText("Teléfono:");
+        lblEtqNombre7.setText("Fecha Conciliación: ");
 
         lblEtqNombre8.setFont(new java.awt.Font("Arial", 2, 18)); // NOI18N
-        lblEtqNombre8.setText("Provincia:");
+        lblEtqNombre8.setText("Descripción: ");
 
-        lblEtqNombre9.setFont(new java.awt.Font("Arial", 2, 18)); // NOI18N
-        lblEtqNombre9.setText("Tipo:");
-
-        lblEtqNombre11.setFont(new java.awt.Font("Arial", 2, 18)); // NOI18N
-        lblEtqNombre11.setText("Especialidad:");
-
-        lblEtqNombre12.setFont(new java.awt.Font("Arial", 2, 18)); // NOI18N
-        lblEtqNombre12.setText("Modalidad: ");
+        lblPeso1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout detailsContainerLayout = new javax.swing.GroupLayout(detailsContainer);
         detailsContainer.setLayout(detailsContainerLayout);
@@ -94,6 +83,7 @@ public class ProvedoresDetails extends javax.swing.JDialog {
             .addGroup(detailsContainerLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(detailsContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPeso1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(detailsContainerLayout.createSequentialGroup()
                         .addGroup(detailsContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,31 +91,12 @@ public class ProvedoresDetails extends javax.swing.JDialog {
                             .addComponent(lblEtqNombre7)
                             .addComponent(lblEtqNombre8)
                             .addComponent(lblEtqNombre4))
+                        .addGap(20, 20, 20)
                         .addGroup(detailsContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(detailsContainerLayout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addGroup(detailsContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblTel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblDir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblNom, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(detailsContainerLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(detailsContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblProv, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(detailsContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(detailsContainerLayout.createSequentialGroup()
-                                        .addComponent(lblEtqNombre12)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblMod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(detailsContainerLayout.createSequentialGroup()
-                                        .addComponent(lblEtqNombre11)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblEsp, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))))))
-                    .addGroup(detailsContainerLayout.createSequentialGroup()
-                        .addComponent(lblEtqNombre9)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(lblConc, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                            .addComponent(lblFin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblIni, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         detailsContainerLayout.setVerticalGroup(
@@ -136,31 +107,23 @@ public class ProvedoresDetails extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(detailsContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblEtqNombre4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblNom, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblIni, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(detailsContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblEtqNombre6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblDir, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblFin, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(detailsContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblEtqNombre7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblTel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblConc, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(detailsContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblEsp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblEtqNombre8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblProv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblEtqNombre11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(detailsContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblEtqNombre9, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-                    .addComponent(lblTipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(detailsContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblEtqNombre8)
                     .addGroup(detailsContainerLayout.createSequentialGroup()
-                        .addGroup(detailsContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lblMod, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblEtqNombre12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(31, 31, 31))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addComponent(lblPeso1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         btnAceptar1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -174,6 +137,11 @@ public class ProvedoresDetails extends javax.swing.JDialog {
             }
         });
 
+        jButton1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jButton1.setText("Ver Servicios");
+        jButton1.setBorderPainted(false);
+        jButton1.setFocusPainted(false);
+
         javax.swing.GroupLayout mainContainerLayout = new javax.swing.GroupLayout(mainContainer);
         mainContainer.setLayout(mainContainerLayout);
         mainContainerLayout.setHorizontalGroup(
@@ -181,7 +149,7 @@ public class ProvedoresDetails extends javax.swing.JDialog {
             .addComponent(jSeparator1)
             .addGroup(mainContainerLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE))
             .addComponent(jSeparator2)
             .addGroup(mainContainerLayout.createSequentialGroup()
                 .addGroup(mainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,6 +159,8 @@ public class ProvedoresDetails extends javax.swing.JDialog {
                         .addComponent(jSeparator3))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainContainerLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAceptar1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -204,10 +174,12 @@ public class ProvedoresDetails extends javax.swing.JDialog {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(detailsContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAceptar1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(mainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnAceptar1, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -217,15 +189,14 @@ public class ProvedoresDetails extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mainContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(mainContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mainContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(mainContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -235,28 +206,29 @@ public class ProvedoresDetails extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnAceptar1ActionPerformed
 
+    /**
+     * @param args the command line arguments
+     */
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar1;
     private javax.swing.JPanel detailsContainer;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JLabel lblDir;
-    private javax.swing.JLabel lblEsp;
-    private javax.swing.JLabel lblEtqNombre11;
-    private javax.swing.JLabel lblEtqNombre12;
+    private javax.swing.JLabel lblConc;
     private javax.swing.JLabel lblEtqNombre4;
     private javax.swing.JLabel lblEtqNombre6;
     private javax.swing.JLabel lblEtqNombre7;
     private javax.swing.JLabel lblEtqNombre8;
-    private javax.swing.JLabel lblEtqNombre9;
-    private javax.swing.JLabel lblMod;
-    private javax.swing.JLabel lblNom;
-    private javax.swing.JLabel lblProv;
-    private javax.swing.JLabel lblTel;
-    private javax.swing.JLabel lblTipo;
+    private javax.swing.JLabel lblFin;
+    private javax.swing.JLabel lblIni;
+    private javax.swing.JLabel lblPeso1;
     private javax.swing.JPanel mainContainer;
     // End of variables declaration//GEN-END:variables
 }
