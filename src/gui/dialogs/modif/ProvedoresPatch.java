@@ -43,7 +43,7 @@ public class ProvedoresPatch extends javax.swing.JDialog {
         txtResp = new javax.swing.JTextField();
         lblEtqNombre4 = new javax.swing.JLabel();
         btnAceptar = new javax.swing.JButton();
-        btnAceptar1 = new javax.swing.JButton();
+        btnModTipo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -77,14 +77,14 @@ public class ProvedoresPatch extends javax.swing.JDialog {
             }
         });
 
-        btnAceptar1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnAceptar1.setText("Modificar Tipo");
-        btnAceptar1.setBorderPainted(false);
-        btnAceptar1.setFocusPainted(false);
-        btnAceptar1.setFocusable(false);
-        btnAceptar1.addActionListener(new java.awt.event.ActionListener() {
+        btnModTipo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnModTipo.setText("Modificar Tipo");
+        btnModTipo.setBorderPainted(false);
+        btnModTipo.setFocusPainted(false);
+        btnModTipo.setFocusable(false);
+        btnModTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAceptar1ActionPerformed(evt);
+                btnModTipoActionPerformed(evt);
             }
         });
 
@@ -119,7 +119,7 @@ public class ProvedoresPatch extends javax.swing.JDialog {
                             .addComponent(txtResp)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainContainerLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnAceptar1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnModTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -158,7 +158,7 @@ public class ProvedoresPatch extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAceptar1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnModTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
         );
 
@@ -186,9 +186,9 @@ public class ProvedoresPatch extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
-    private void btnAceptar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptar1ActionPerformed
+    private void btnModTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModTipoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAceptar1ActionPerformed
+    }//GEN-LAST:event_btnModTipoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -234,7 +234,7 @@ public class ProvedoresPatch extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
-    private javax.swing.JButton btnAceptar1;
+    private javax.swing.JButton btnModTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
