@@ -124,9 +124,10 @@
                               </Group>
                               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblConc" max="32767" attributes="0"/>
+                                  <Component id="lblConc" pref="240" max="32767" attributes="0"/>
                                   <Component id="lblFin" alignment="0" max="32767" attributes="0"/>
                                   <Component id="lblIni" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -155,7 +156,13 @@
                           <Component id="lblConc" alignment="0" min="-2" pref="22" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblEtqNombre8" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="lblEtqNombre8" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel3" min="-2" pref="20" max="-2" attributes="0"/>
+                              <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                       <EmptySpace pref="22" max="32767" attributes="0"/>
                       <Component id="lblPeso1" min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
@@ -231,6 +238,8 @@
                   <Font name="Arial" size="14" style="1"/>
                 </Property>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel3">
             </Component>
           </SubComponents>
         </Container>
