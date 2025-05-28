@@ -40,7 +40,7 @@ public class AnimalesPatch extends javax.swing.JDialog {
         txtPeso = new javax.swing.JTextField();
         lblEtqNombre3 = new javax.swing.JLabel();
         txtNac = new javax.swing.JTextField();
-        txtNac1 = new javax.swing.JTextField();
+        txtIng = new javax.swing.JTextField();
         lblEtqNombre4 = new javax.swing.JLabel();
         btnAceptar = new javax.swing.JButton();
 
@@ -103,7 +103,7 @@ public class AnimalesPatch extends javax.swing.JDialog {
                             .addComponent(lblEtqNombre4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(mainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNac1)
+                            .addComponent(txtIng)
                             .addComponent(txtNac)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainContainerLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -138,7 +138,7 @@ public class AnimalesPatch extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEtqNombre4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNac1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtIng, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -224,8 +224,8 @@ public class AnimalesPatch extends javax.swing.JDialog {
     private javax.swing.JLabel lblEtqNombre3;
     private javax.swing.JLabel lblEtqNombre4;
     private javax.swing.JPanel mainContainer;
+    private javax.swing.JTextField txtIng;
     private javax.swing.JTextField txtNac;
-    private javax.swing.JTextField txtNac1;
     private javax.swing.JTextField txtNom;
     private javax.swing.JTextField txtPeso;
     private javax.swing.JTextField txtRaza;

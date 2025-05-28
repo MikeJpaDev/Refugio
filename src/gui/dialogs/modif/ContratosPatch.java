@@ -33,10 +33,10 @@ public class ContratosPatch extends javax.swing.JDialog {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
         lblEtqNombre = new javax.swing.JLabel();
-        txtNom = new javax.swing.JTextField();
+        txtIni = new javax.swing.JTextField();
         lblEtqNombre3 = new javax.swing.JLabel();
-        txtNac = new javax.swing.JTextField();
-        txtNac1 = new javax.swing.JTextField();
+        txtFin = new javax.swing.JTextField();
+        txtConc = new javax.swing.JTextField();
         lblEtqNombre4 = new javax.swing.JLabel();
         btnAceptar = new javax.swing.JButton();
         lblEtqNombre5 = new javax.swing.JLabel();
@@ -100,9 +100,9 @@ public class ContratosPatch extends javax.swing.JDialog {
                                     .addComponent(lblEtqNombre5))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(mainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtNom)
-                                    .addComponent(txtNac1)
-                                    .addComponent(txtNac)
+                                    .addComponent(txtIni)
+                                    .addComponent(txtConc)
+                                    .addComponent(txtFin)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                         .addContainerGap())))
         );
@@ -118,15 +118,15 @@ public class ContratosPatch extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEtqNombre, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtIni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEtqNombre3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEtqNombre4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNac1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtConc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainContainerLayout.createSequentialGroup()
@@ -219,9 +219,9 @@ public class ContratosPatch extends javax.swing.JDialog {
     private javax.swing.JLabel lblEtqNombre4;
     private javax.swing.JLabel lblEtqNombre5;
     private javax.swing.JPanel mainContainer;
+    private javax.swing.JTextField txtConc;
     private javax.swing.JTextArea txtDesc;
-    private javax.swing.JTextField txtNac;
-    private javax.swing.JTextField txtNac1;
-    private javax.swing.JTextField txtNom;
+    private javax.swing.JTextField txtFin;
+    private javax.swing.JTextField txtIni;
     // End of variables declaration//GEN-END:variables
 }
