@@ -68,9 +68,9 @@
                                   </Group>
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtIni" max="32767" attributes="0"/>
-                                      <Component id="txtConc" max="32767" attributes="0"/>
-                                      <Component id="txtFin" max="32767" attributes="0"/>
+                                      <Component id="txtNom" max="32767" attributes="0"/>
+                                      <Component id="txtNac1" max="32767" attributes="0"/>
+                                      <Component id="txtNac" max="32767" attributes="0"/>
                                       <Component id="jScrollPane1" alignment="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -93,17 +93,17 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblEtqNombre" alignment="3" max="32767" attributes="0"/>
-                      <Component id="txtIni" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtNom" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblEtqNombre3" alignment="3" max="32767" attributes="0"/>
-                      <Component id="txtFin" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtNac" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblEtqNombre4" alignment="3" max="32767" attributes="0"/>
-                      <Component id="txtConc" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtNac1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -148,7 +148,7 @@
             <Property name="text" type="java.lang.String" value="Fecha Inicio:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtIni">
+        <Component class="javax.swing.JTextField" name="txtNom">
         </Component>
         <Component class="javax.swing.JLabel" name="lblEtqNombre3">
           <Properties>
@@ -158,9 +158,9 @@
             <Property name="text" type="java.lang.String" value="Fecha Fin:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtFin">
+        <Component class="javax.swing.JTextField" name="txtNac">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtConc">
+        <Component class="javax.swing.JTextField" name="txtNac1">
         </Component>
         <Component class="javax.swing.JLabel" name="lblEtqNombre4">
           <Properties>

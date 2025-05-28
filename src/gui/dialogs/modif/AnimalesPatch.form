@@ -73,7 +73,7 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtIng" max="32767" attributes="0"/>
+                              <Component id="txtNac1" max="32767" attributes="0"/>
                               <Component id="txtNac" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -118,7 +118,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lblEtqNombre4" alignment="3" max="32767" attributes="0"/>
-                      <Component id="txtIng" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtNac1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   <Component id="jSeparator3" min="-2" pref="13" max="-2" attributes="0"/>
@@ -185,7 +185,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtNac">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtIng">
+        <Component class="javax.swing.JTextField" name="txtNac1">
         </Component>
         <Component class="javax.swing.JLabel" name="lblEtqNombre4">
           <Properties>
