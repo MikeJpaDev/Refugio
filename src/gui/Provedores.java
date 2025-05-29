@@ -4,6 +4,8 @@
  */
 package src.gui;
 
+import src.gui.dialogs.datails.ProvedoresDetails;
+
 /**
  *
  * @author Manuel Montero
@@ -89,16 +91,11 @@ public class Provedores extends javax.swing.JFrame {
         tableContainer.setLayout(tableContainerLayout);
         tableContainerLayout.setHorizontalGroup(
             tableContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tableContainerLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
         );
         tableContainerLayout.setVerticalGroup(
             tableContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tableContainerLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
         );
 
         btnMod.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -229,7 +226,20 @@ public class Provedores extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCrear1ActionPerformed
 
     private void btnDetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetActionPerformed
-        // TODO add your handling code here:
+        if (tableProv.getSelectedRow() != -1) {
+            java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                ProvedoresDetails dialog = new ProvedoresDetails(new javax.swing.JFrame(), true);
+                    dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                        @Override
+                        public void windowClosing(java.awt.event.WindowEvent e) {
+                            System.exit(0);
+                        }
+                    });
+                    dialog.setVisible(true);
+                }
+            });
+        }
     }//GEN-LAST:event_btnDetActionPerformed
 
     private void btnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimActionPerformed

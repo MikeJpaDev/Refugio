@@ -2,9 +2,7 @@ package services
 import models.Veterinario
 import utils.DatabaseConnection
 
-import java.sql.SQLException
-import java.util.UUID
-import scala.util.{Failure, Try, Using}
+import scala.util.{Try, Using}
 
 object VeterinarioService {
   def getAllVet: List[Veterinario] = DatabaseConnection.withConnection {conn =>
@@ -53,78 +51,6 @@ object VeterinarioService {
       stmt.setInt(9, clinica)
       
       stmt.executeQuery().close()
-    }
-  }
-
-  def updateVeterinario(
-                         proveedorId: String,
-                         nombre: String,
-                         direccion: String,
-                         telefono: String,
-                         email: String,
-                         provinciaId: Int,
-                         responsable: String,
-                         especialidad: String,
-                         modalidad: String,
-                         clinicaId: Int
-                       ): Try[Unit] = {
-    Try(UUID.fromString(proveedorId)).flatMap { uuid =>
-      DatabaseConnection.withConnection { conn =>
-        val query = "{call public.update_proveedor_veterinario(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}"
-
-        Using(conn.prepareCall(query)) { stmt =>
-          stmt.setObject(1, uuid)
-          stmt.setString(2, nombre)
-          stmt.setString(3, direccion)
-          stmt.setString(4, telefono)
-          stmt.setString(5, email)
-          stmt.setInt(6, provinciaId)
-          stmt.setString(7, responsable)
-          stmt.setString(8, especialidad)
-          stmt.setString(9, modalidad)
-          stmt.setInt(10, clinicaId)
-
-          stmt.executeUpdate()
-        }.map(_ => ())
-      }
-    }.recoverWith {
-      case _: IllegalArgumentException =>
-        Failure(new SQLException(s"UUID inválido: $proveedorId"))
-      case e: SQLException =>
-        Failure(new SQLException(s"Error actualizando veterinario: ${e.getMessage}"))
-    }
-  }
-
-  def getVeterinarioById(proveedorId: String): Try[Veterinario] = {
-    Try(UUID.fromString(proveedorId)).flatMap { uuid =>
-      DatabaseConnection.withConnection { conn =>
-        val query = "SELECT * FROM get_veterinario_by_id(?)"
-
-        Using(conn.prepareStatement(query)) { stmt =>
-          stmt.setObject(1, uuid)
-          val rs = stmt.executeQuery()
-
-          if (rs.next()) {
-            Veterinario(
-              rs.getString("proveedor_id"),
-              rs.getString("nombre_proveedor"),
-              rs.getString("direccion"),
-              rs.getString("telefono"),
-              rs.getString("email"),
-              rs.getString("provincia_nombre"),
-              rs.getString("responsable"),
-              rs.getString("especialidad"),
-              rs.getString("modalidad"),
-              rs.getString("nombre_clinica")
-            )
-          } else {
-            throw new SQLException(s"Veterinario no encontrado")
-          }
-        }
-      }
-    }.recover {
-      case _: IllegalArgumentException =>
-        throw new SQLException(s"UUID inválido: $proveedorId")
     }
   }
 }
