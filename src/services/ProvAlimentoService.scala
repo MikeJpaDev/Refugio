@@ -1,19 +1,21 @@
 package services
-import models.Veterinario
+
+import models.ProveedorAlimento
 import utils.DatabaseConnection
 
 import java.sql.SQLException
 import java.util.UUID
 import scala.util.{Failure, Try, Using}
 
-object VeterinarioService {
-  def getAllVet: List[Veterinario] = DatabaseConnection.withConnection {conn =>
-    val query = "SELECT * FROM v_vets"
-    Using(conn.prepareStatement(query)) {stmt =>
+object ProvAlimentoService {
+  def getAllAlimentos: List[ProveedorAlimento] = DatabaseConnection.withConnection { conn =>
+    val query = "SELECT * FROM v_aliment"
+
+    Using(conn.prepareStatement(query)) { stmt =>
       val rs = stmt.executeQuery()
       Iterator.continually(rs)
         .takeWhile(_.next())
-        .map(rs => Veterinario(
+        .map(rs => ProveedorAlimento(
           rs.getString("proveedor_id"),
           rs.getString("nombre_proveedor"),
           rs.getString("direccion"),
@@ -21,25 +23,21 @@ object VeterinarioService {
           rs.getString("email"),
           rs.getString("provincia_nombre"),
           rs.getString("responsable"),
-          rs.getString("especialidad"),
-          rs.getString("modalidad"),
-          rs.getString("nombre_clinica")
+          rs.getString("tipo_alimento")
         )).toList
     }.getOrElse(List.empty)
   }
 
-  def createVet(
-                 nombre_proveedor: String,
-                 direccion: String,
-                 telefono: String,
-                 email: String,
-                 provincia: Int,
-                 responsable: String,
-                 especialidad: String,
-                 modalidad: String,
-                 clinica: Int
-               ): Try[Unit] = DatabaseConnection.withConnection { conn =>
-    val query = "SELECT * FROM public.insert_proveedor_veterinario(?, ?, ?, ?, ?, ?, ?, ?, ?)"
+  def createProveedorALimento(
+                      nombre_proveedor: String,
+                      direccion: String,
+                      telefono: String,
+                      email: String,
+                      provincia: Int,
+                      responsable: String,
+                      tipo_alimento: String
+                    ): Try[Unit] = DatabaseConnection.withConnection { conn =>
+    val query = "SELECT * FROM public.insert_proveedor_alimenticio(?, ?, ?, ?, ?, ?, ?)"
 
     Using(conn.prepareStatement(query)) { stmt =>
       stmt.setString(1, nombre_proveedor)
@@ -48,29 +46,25 @@ object VeterinarioService {
       stmt.setString(4, email)
       stmt.setInt(5, provincia)
       stmt.setString(6, responsable)
-      stmt.setString(7, especialidad)
-      stmt.setString(8, modalidad)
-      stmt.setInt(9, clinica)
-      
+      stmt.setString(7, tipo_alimento)
+
       stmt.executeQuery().close()
     }
   }
 
-  def updateVeterinario(
-                         proveedorId: String,
-                         nombre: String,
-                         direccion: String,
-                         telefono: String,
-                         email: String,
-                         provinciaId: Int,
-                         responsable: String,
-                         especialidad: String,
-                         modalidad: String,
-                         clinicaId: Int
-                       ): Try[Unit] = {
+  def updateProveedorAlimento(
+                      proveedorId: String,
+                      nombre: String,
+                      direccion: String,
+                      telefono: String,
+                      email: String,
+                      provinciaId: Int,
+                      responsable: String,
+                      tipoAlimento: String
+                    ): Try[Unit] = {
     Try(UUID.fromString(proveedorId)).flatMap { uuid =>
       DatabaseConnection.withConnection { conn =>
-        val query = "{call public.update_proveedor_veterinario(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}"
+        val query = "{call public.update_proveedor_alimento(?, ?, ?, ?, ?, ?, ?, ?)}"
 
         Using(conn.prepareCall(query)) { stmt =>
           stmt.setObject(1, uuid)
@@ -80,9 +74,7 @@ object VeterinarioService {
           stmt.setString(5, email)
           stmt.setInt(6, provinciaId)
           stmt.setString(7, responsable)
-          stmt.setString(8, especialidad)
-          stmt.setString(9, modalidad)
-          stmt.setInt(10, clinicaId)
+          stmt.setString(8, tipoAlimento)
 
           stmt.executeUpdate()
         }.map(_ => ())
@@ -91,21 +83,22 @@ object VeterinarioService {
       case _: IllegalArgumentException =>
         Failure(new SQLException(s"UUID inválido: $proveedorId"))
       case e: SQLException =>
-        Failure(new SQLException(s"Error actualizando veterinario: ${e.getMessage}"))
+        Failure(new SQLException(s"Error actualizando proveedor alimento: ${e.getMessage}"))
     }
   }
 
-  def getVeterinarioById(proveedorId: String): Try[Veterinario] = {
+  def getProvAlimentoById(proveedorId: String): Try[ProveedorAlimento] = {
     Try(UUID.fromString(proveedorId)).flatMap { uuid =>
       DatabaseConnection.withConnection { conn =>
-        val query = "SELECT * FROM get_veterinario_by_id(?)"
+        val query = "SELECT * FROM get_alimento_by_id(?)"
 
         Using(conn.prepareStatement(query)) { stmt =>
           stmt.setObject(1, uuid)
+          
           val rs = stmt.executeQuery()
 
           if (rs.next()) {
-            Veterinario(
+            ProveedorAlimento(
               rs.getString("proveedor_id"),
               rs.getString("nombre_proveedor"),
               rs.getString("direccion"),
@@ -113,18 +106,16 @@ object VeterinarioService {
               rs.getString("email"),
               rs.getString("provincia_nombre"),
               rs.getString("responsable"),
-              rs.getString("especialidad"),
-              rs.getString("modalidad"),
-              rs.getString("nombre_clinica")
+              rs.getString("tipo_alimento")
             )
           } else {
-            throw new SQLException(s"Veterinario no encontrado")
+            throw new SQLException(s"Proveedor de alimento no encontrado")
           }
         }
       }
     }.recover {
       case _: IllegalArgumentException =>
-        throw new SQLException(s"UUID inválido: $proveedorId")
+        throw new SQLException(s"Formato de UUID inválido: $proveedorId")
     }
   }
 }
