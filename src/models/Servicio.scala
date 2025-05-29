@@ -5,7 +5,7 @@ import java.util.UUID
 case class Servicio(
                      servicioId: Int,
                      contratoId: Int,
-                     proveedorId: UUID,
+                     proveedorId: String,
                      precioBase: Double,
                      recargo: Double,
                      diasDuracion: Int,
