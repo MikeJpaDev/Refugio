@@ -51,6 +51,7 @@ public class DonacionesDetails extends javax.swing.JDialog {
         btnAceptar1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableDonaciones = new javax.swing.JTable();
+        btnAceptar2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -59,7 +60,7 @@ public class DonacionesDetails extends javax.swing.JDialog {
         jLabel1.setText("Servicios");
 
         btnAceptar1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnAceptar1.setText("Aceptar");
+        btnAceptar1.setText("Nueva Donación");
         btnAceptar1.setBorderPainted(false);
         btnAceptar1.setFocusPainted(false);
         btnAceptar1.setFocusable(false);
@@ -101,6 +102,17 @@ public class DonacionesDetails extends javax.swing.JDialog {
             tableDonaciones.getColumnModel().getColumn(1).setResizable(false);
         }
 
+        btnAceptar2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnAceptar2.setText("Aceptar");
+        btnAceptar2.setBorderPainted(false);
+        btnAceptar2.setFocusPainted(false);
+        btnAceptar2.setFocusable(false);
+        btnAceptar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptar2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout mainContainerLayout = new javax.swing.GroupLayout(mainContainer);
         mainContainer.setLayout(mainContainerLayout);
         mainContainerLayout.setHorizontalGroup(
@@ -112,13 +124,17 @@ public class DonacionesDetails extends javax.swing.JDialog {
                 .addGroup(mainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(mainContainerLayout.createSequentialGroup()
-                        .addGroup(mainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
-                            .addGroup(mainContainerLayout.createSequentialGroup()
-                                .addGap(458, 458, 458)
-                                .addComponent(btnAceptar1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
                         .addContainerGap())))
-            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(mainContainerLayout.createSequentialGroup()
+                .addGroup(mainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainContainerLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnAceptar1)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAceptar2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSeparator3))
+                .addContainerGap())
         );
         mainContainerLayout.setVerticalGroup(
             mainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,7 +149,9 @@ public class DonacionesDetails extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAceptar1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(mainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAceptar2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAceptar1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -161,12 +179,17 @@ public class DonacionesDetails extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnAceptar1ActionPerformed
 
+    private void btnAceptar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptar2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAceptar2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar1;
+    private javax.swing.JButton btnAceptar2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;

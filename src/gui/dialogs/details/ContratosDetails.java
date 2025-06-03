@@ -6,6 +6,7 @@ package src.gui.dialogs.details;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import src.gui.Servicios;
 
 /**
  *
@@ -230,7 +231,7 @@ public class ContratosDetails extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ServiciosDetails dialog = new ServiciosDetails(new javax.swing.JFrame(), true);
+                Servicios dialog = new Servicios(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

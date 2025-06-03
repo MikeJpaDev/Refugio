@@ -7,6 +7,7 @@ package src.gui;
 import com.formdev.flatlaf.FlatDarkLaf;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,13 +17,30 @@ import java.awt.Toolkit;
 public class Inicio extends javax.swing.JFrame {
     
     private static Inicio frameV;
+    private static boolean logged = false;
 
     /**
      * Creates new form Inicio
      */
+    
+    public void setLogged(boolean val){
+        logged = val;
+    }
+    
     private Inicio() {
         initComponents();
         centrarEnPantalla();
+    }
+    
+    public static void alternateButtons(){
+        if (logged) {
+            btnCerrar.setEnabled(true);
+            btnIniciar.setEnabled(false);
+        }
+        else {
+            btnCerrar.setEnabled(false);
+            btnIniciar.setEnabled(true);
+        }
     }
     
     public static Inicio getFrame(){
@@ -55,8 +73,8 @@ public class Inicio extends javax.swing.JFrame {
         mainContainer = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        btnCerrar = new javax.swing.JMenuItem();
+        btnIniciar = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -86,17 +104,28 @@ public class Inicio extends javax.swing.JFrame {
         );
 
         jMenu3.setText("Sesión");
-
-        jMenuItem1.setText("Cerrar Sesión");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenu3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenu3ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem1);
 
-        jMenuItem2.setText("Iniciar Sesión");
-        jMenu3.add(jMenuItem2);
+        btnCerrar.setText("Cerrar Sesión");
+        btnCerrar.setEnabled(false);
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
+        jMenu3.add(btnCerrar);
+
+        btnIniciar.setText("Iniciar Sesión");
+        btnIniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIniciarActionPerformed(evt);
+            }
+        });
+        jMenu3.add(btnIniciar);
 
         jMenuBar1.add(jMenu3);
 
@@ -166,9 +195,12 @@ public class Inicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+        if (JOptionPane.showConfirmDialog(frameV, "Salir del Sistema", "Cerrar Sesión", JOptionPane.YES_NO_CANCEL_OPTION) == JOptionPane.YES_OPTION){
+            Inicio.getFrame().setLogged(false);
+            Inicio.getFrame().alternateButtons();
+        }
+    }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -196,6 +228,25 @@ public class Inicio extends javax.swing.JFrame {
         });
         this.setVisible(false);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                IniciarSesion dialog = new IniciarSesion(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_btnIniciarActionPerformed
+
+    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+        
+    }//GEN-LAST:event_jMenu3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,14 +286,14 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private static javax.swing.JMenuItem btnCerrar;
+    private static javax.swing.JMenuItem btnIniciar;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
