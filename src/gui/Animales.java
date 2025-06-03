@@ -4,6 +4,8 @@
  */
 package src.gui;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import src.gui.dialogs.create.CreateAnimal;
 import src.gui.dialogs.details.AnimalesDetails;
@@ -20,6 +22,19 @@ public class Animales extends javax.swing.JFrame {
      */
     public Animales() {
         initComponents();
+        centrarEnPantalla();
+    }
+    
+    private void centrarEnPantalla() {
+        // Obtener dimensiones de la pantalla
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        
+        // Calcular coordenadas X y Y para centrar
+        int x = (screenSize.width - this.getWidth()) / 2;
+        int y = (screenSize.height - this.getHeight()) / 2;
+        
+        // Establecer posición
+        this.setLocation(x, y);
     }
 
     /**
@@ -46,6 +61,7 @@ public class Animales extends javax.swing.JFrame {
         btnAtras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(0, 0));
 
         javax.swing.GroupLayout mainContainerLayout = new javax.swing.GroupLayout(mainContainer);
         mainContainer.setLayout(mainContainerLayout);

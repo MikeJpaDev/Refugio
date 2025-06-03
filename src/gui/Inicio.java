@@ -5,6 +5,8 @@
 package src.gui;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 /**
  *
@@ -20,10 +22,23 @@ public class Inicio extends javax.swing.JFrame {
      */
     private Inicio() {
         initComponents();
+        centrarEnPantalla();
     }
     
     public static Inicio getFrame(){
         return frameV;
+    }
+    
+    private void centrarEnPantalla() {
+        // Obtener dimensiones de la pantalla
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        
+        // Calcular coordenadas X y Y para centrar
+        int x = (screenSize.width - this.getWidth()) / 2;
+        int y = (screenSize.height - this.getHeight()) / 2;
+        
+        // Establecer posición
+        this.setLocation(x, y);
     }
 
     /**
@@ -57,6 +72,7 @@ public class Inicio extends javax.swing.JFrame {
         jMenu2.setText("jMenu2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(0, 0));
 
         javax.swing.GroupLayout mainContainerLayout = new javax.swing.GroupLayout(mainContainer);
         mainContainer.setLayout(mainContainerLayout);

@@ -4,6 +4,8 @@
  */
 package src.gui;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import src.gui.dialogs.create.CreateProvedor;
 import src.gui.dialogs.details.ProvedoresDetails;
 import src.gui.dialogs.modif.ProvedoresPatch;
@@ -19,6 +21,19 @@ public class Provedores extends javax.swing.JFrame {
      */
     public Provedores() {
         initComponents();
+        centrarEnPantalla();
+    }
+    
+    private void centrarEnPantalla() {
+        // Obtener dimensiones de la pantalla
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        
+        // Calcular coordenadas X y Y para centrar
+        int x = (screenSize.width - this.getWidth()) / 2;
+        int y = (screenSize.height - this.getHeight()) / 2;
+        
+        // Establecer posición
+        this.setLocation(x, y);
     }
 
     /**

@@ -4,6 +4,8 @@
  */
 package src.gui;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import src.gui.dialogs.create.CreateContrato;
 import src.gui.dialogs.details.ContratosDetails;
@@ -20,6 +22,19 @@ public class Contratos extends javax.swing.JFrame {
      */
     public Contratos() {
         initComponents();
+        centrarEnPantalla();
+    }
+    
+    private void centrarEnPantalla() {
+        // Obtener dimensiones de la pantalla
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        
+        // Calcular coordenadas X y Y para centrar
+        int x = (screenSize.width - this.getWidth()) / 2;
+        int y = (screenSize.height - this.getHeight()) / 2;
+        
+        // Establecer posición
+        this.setLocation(x, y);
     }
 
     /**

@@ -4,6 +4,9 @@
  */
 package src.gui.dialogs.details;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 /**
  *
  * @author Manuel Montero
@@ -16,6 +19,19 @@ public class ContratosDetails extends javax.swing.JDialog {
     public ContratosDetails(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        centrarEnPantalla();
+    }
+    
+    private void centrarEnPantalla() {
+        // Obtener dimensiones de la pantalla
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        
+        // Calcular coordenadas X y Y para centrar
+        int x = (screenSize.width - this.getWidth()) / 2;
+        int y = (screenSize.height - this.getHeight()) / 2;
+        
+        // Establecer posición
+        this.setLocation(x, y);
     }
 
     /**
