@@ -4,6 +4,10 @@
  */
 package src.gui.dialogs.details;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import src.gui.Actividades;
+
 /**
  *
  * @author Manuel Montero
@@ -16,6 +20,19 @@ public class AnimalesDetails extends javax.swing.JDialog {
     public AnimalesDetails(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        centrarEnPantalla();
+    }
+    
+    private void centrarEnPantalla() {
+        // Obtener dimensiones de la pantalla
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        
+        // Calcular coordenadas X y Y para centrar
+        int x = (screenSize.width - this.getWidth()) / 2;
+        int y = (screenSize.height - this.getHeight()) / 2;
+        
+        // Establecer posición
+        this.setLocation(x, y);
     }
 
     /**
@@ -55,9 +72,10 @@ public class AnimalesDetails extends javax.swing.JDialog {
         lblEtqEsp1 = new javax.swing.JLabel();
         lblRecaudado = new javax.swing.JLabel();
         lblCantDonaciones = new javax.swing.JLabel();
-        btnVerDonaciones = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
         btnAceptar = new javax.swing.JButton();
+        btnVerAct = new javax.swing.JButton();
+        btnVerDonaciones1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -194,17 +212,6 @@ public class AnimalesDetails extends javax.swing.JDialog {
 
         lblCantDonaciones.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
 
-        btnVerDonaciones.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btnVerDonaciones.setText("Ver Donaciones");
-        btnVerDonaciones.setBorderPainted(false);
-        btnVerDonaciones.setFocusPainted(false);
-        btnVerDonaciones.setFocusable(false);
-        btnVerDonaciones.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVerDonacionesActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -218,7 +225,7 @@ public class AnimalesDetails extends javax.swing.JDialog {
                         .addContainerGap()
                         .addComponent(lblEtqNombre1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblCantDonaciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(lblCantDonaciones, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
@@ -226,10 +233,6 @@ public class AnimalesDetails extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblRecaudado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(8, 8, 8))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(114, Short.MAX_VALUE)
-                .addComponent(btnVerDonaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(122, 122, 122))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,9 +247,7 @@ public class AnimalesDetails extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblRecaudado, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEtqEsp1))
-                .addGap(39, 39, 39)
-                .addComponent(btnVerDonaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
 
         btnAceptar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -257,6 +258,28 @@ public class AnimalesDetails extends javax.swing.JDialog {
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarActionPerformed(evt);
+            }
+        });
+
+        btnVerAct.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnVerAct.setText("Ver Actividades");
+        btnVerAct.setBorderPainted(false);
+        btnVerAct.setFocusPainted(false);
+        btnVerAct.setFocusable(false);
+        btnVerAct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerActActionPerformed(evt);
+            }
+        });
+
+        btnVerDonaciones1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btnVerDonaciones1.setText("Ver Donaciones");
+        btnVerDonaciones1.setBorderPainted(false);
+        btnVerDonaciones1.setFocusPainted(false);
+        btnVerDonaciones1.setFocusable(false);
+        btnVerDonaciones1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerDonaciones1ActionPerformed(evt);
             }
         });
 
@@ -279,6 +302,10 @@ public class AnimalesDetails extends javax.swing.JDialog {
                     .addComponent(jSeparator3)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainContainerLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnVerAct, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnVerDonaciones1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -297,7 +324,10 @@ public class AnimalesDetails extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(mainContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVerAct, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVerDonaciones1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 9, Short.MAX_VALUE))
         );
 
@@ -320,10 +350,10 @@ public class AnimalesDetails extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnVerDonacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerDonacionesActionPerformed
+    private void btnVerActActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerActActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DonacionesDetails dialog = new DonacionesDetails(new javax.swing.JFrame(), true);
+                Actividades dialog = new Actividades(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -333,16 +363,21 @@ public class AnimalesDetails extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
-    }//GEN-LAST:event_btnVerDonacionesActionPerformed
+    }//GEN-LAST:event_btnVerActActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
+    private void btnVerDonaciones1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerDonaciones1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVerDonaciones1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
-    private javax.swing.JButton btnVerDonaciones;
+    private javax.swing.JButton btnVerAct;
+    private javax.swing.JButton btnVerDonaciones1;
     private javax.swing.JPanel detailsContainer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

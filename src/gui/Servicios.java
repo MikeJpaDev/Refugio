@@ -1,26 +1,23 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package src.gui;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import javax.swing.JOptionPane;
-import src.gui.dialogs.create.CreateContrato;
-import src.gui.dialogs.details.ContratosDetails;
-import src.gui.dialogs.modif.ContratosPatch;
 
 /**
  *
  * @author Manuel Montero
  */
-public class Contratos extends javax.swing.JFrame {
+public class Servicios extends javax.swing.JDialog {
 
     /**
-     * Creates new form Contratos
+     * Creates new form Servicios
      */
-    public Contratos() {
+    public Servicios(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
         centrarEnPantalla();
     }
@@ -52,7 +49,7 @@ public class Contratos extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         tableContainer = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableContratos = new javax.swing.JTable();
+        tableServ = new javax.swing.JTable();
         buttonsContainer = new javax.swing.JPanel();
         btnMod = new javax.swing.JButton();
         btnCrear = new javax.swing.JButton();
@@ -60,29 +57,29 @@ public class Contratos extends javax.swing.JFrame {
         btnElim = new javax.swing.JButton();
         btnAtras = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Contratos");
+        jLabel1.setText("Servicios");
 
-        tableContratos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        tableContratos.setModel(new javax.swing.table.DefaultTableModel(
+        tableServ.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        tableServ.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Fecha Inicio", "Fecha Fin", "Fecha Conciliación"
+                "ID", "Precio Base", "Recargo", "Duración(Días)", "Tipo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.Float.class, java.lang.Float.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -93,26 +90,20 @@ public class Contratos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tableContratos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        tableContratos.setFocusable(false);
-        tableContratos.setGridColor(new java.awt.Color(204, 204, 204));
-        jScrollPane1.setViewportView(tableContratos);
-        if (tableContratos.getColumnModel().getColumnCount() > 0) {
-            tableContratos.getColumnModel().getColumn(0).setResizable(false);
-            tableContratos.getColumnModel().getColumn(1).setResizable(false);
-            tableContratos.getColumnModel().getColumn(2).setResizable(false);
-            tableContratos.getColumnModel().getColumn(3).setResizable(false);
-        }
+        tableServ.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tableServ.setFocusable(false);
+        tableServ.setGridColor(new java.awt.Color(204, 204, 204));
+        jScrollPane1.setViewportView(tableServ);
 
         javax.swing.GroupLayout tableContainerLayout = new javax.swing.GroupLayout(tableContainer);
         tableContainer.setLayout(tableContainerLayout);
         tableContainerLayout.setHorizontalGroup(
             tableContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
         );
         tableContainerLayout.setVerticalGroup(
             tableContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
         btnMod.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -174,14 +165,14 @@ public class Contratos extends javax.swing.JFrame {
         buttonsContainer.setLayout(buttonsContainerLayout);
         buttonsContainerLayout.setHorizontalGroup(
             buttonsContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buttonsContainerLayout.createSequentialGroup()
+            .addGroup(buttonsContainerLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(buttonsContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(buttonsContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAtras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnDet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnMod, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
-                    .addComponent(btnCrear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnElim, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnDet, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnMod, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCrear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnElim, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         buttonsContainerLayout.setVerticalGroup(
@@ -249,55 +240,15 @@ public class Contratos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModActionPerformed
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                ContratosPatch dialog = new ContratosPatch(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
+
     }//GEN-LAST:event_btnModActionPerformed
 
     private void btnCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearActionPerformed
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                CreateContrato dialog = new CreateContrato(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
+
     }//GEN-LAST:event_btnCrearActionPerformed
 
     private void btnDetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetActionPerformed
-        if(tableContratos.getSelectedRow() != -1){
-            try{
-                java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                    ContratosDetails dialog = new ContratosDetails(new javax.swing.JFrame(), true);
-                    dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                         @Override
-                        public void windowClosing(java.awt.event.WindowEvent e) {
-                            System.exit(0);
-                        }
-                    });
-                    dialog.setVisible(true);
-                   }
-                });
-            }
-            catch(Exception e){
-                
-            }
-        }
+
     }//GEN-LAST:event_btnDetActionPerformed
 
     private void btnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimActionPerformed
@@ -326,6 +277,6 @@ public class Contratos extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPanel mainContainer;
     private javax.swing.JPanel tableContainer;
-    private javax.swing.JTable tableContratos;
+    private javax.swing.JTable tableServ;
     // End of variables declaration//GEN-END:variables
 }
