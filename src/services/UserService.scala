@@ -27,7 +27,8 @@ object UserService {
             User(
               rs.getString("username"),
               rs.getInt("rol_id"),
-              rs.getString("rol")
+              rs.getString("rol"),
+              rs.getString("password")
             )
           } else {
             throw new SQLException("Error al crear usuario: sin datos de retorno")
@@ -39,6 +40,4 @@ object UserService {
         throw new SQLException(s"Error en createUser: ${e.getMessage}", e)
     }
   }
-
-
 }
