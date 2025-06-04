@@ -8,4 +8,5 @@ import scala.util.{Failure, Success}
 
 @main
 def main(): Unit =
-  println(UserService.createUser("admin2", "admin", 1))
+  println(UserService.getUserByID("admin"))
+  println(UserService.login("asd", "admin"))
