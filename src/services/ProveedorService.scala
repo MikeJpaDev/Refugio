@@ -67,29 +67,42 @@ object ProveedorService {
       }).toList
   }
 
-  def deleteProveedor(proveedorId: String): Try[Boolean] = {
-    Try(UUID.fromString(proveedorId)).flatMap { uuid =>
+  import java.sql.{SQLException, CallableStatement}
+  import java.util.UUID
+
+  def deleteProveedor(proveedorId: String): Boolean = {
+    try {
+      val uuid = UUID.fromString(proveedorId)
+
       DatabaseConnection.withConnection { conn =>
         val query = "SELECT * FROM public.delete_proveedor(?)"
 
-        Using(conn.prepareCall(query)) { stmt =>
-          stmt.setObject(1, uuid)
-          val rs = stmt.executeQuery()
-
-          if (rs.next()) {
-            true  // Se eliminó y devolvió el registro eliminado
-          } else {
-            false // No se encontró el proveedor
+        try {
+          val stmt = conn.prepareCall(query)
+          try {
+            stmt.setObject(1, uuid)
+            val rs = stmt.executeQuery()
+            rs.next() // Devuelve true si se eliminó un registro, false si no
+          } finally {
+            stmt.close()
           }
+        } catch {
+          case e: SQLException if e.getSQLState == "23503" =>
+            throw new SQLException("No se puede eliminar - existen registros vinculados", e)
+          case e: SQLException =>
+            throw new SQLException(s"Error en base de datos: ${e.getMessage}", e)
         }
       }
-    }.recover {
-      case e: SQLException if e.getSQLState == "23503" =>
-        throw new SQLException("No se puede eliminar - existen registros vinculados")
-      case e: SQLException =>
-        throw new SQLException(s"Error en base de datos: ${e.getMessage}")
+
+    } catch {
       case _: IllegalArgumentException =>
-        throw new SQLException(s"Formato de UUID inválido: $proveedorId")
+        false // UUID inválido
+      case e: SQLException if e.getMessage.contains("registros vinculados") =>
+        false // Error de integridad referencial
+      case _: SQLException =>
+        false // Otros errores de base de datos
+      case _: Exception =>
+        false // Cualquier otro error
     }
   }
 }
