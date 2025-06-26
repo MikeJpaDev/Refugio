@@ -5,10 +5,11 @@ import utils.DatabaseConnection
 
 import java.sql.{CallableStatement, PreparedStatement, ResultSet, SQLException}
 import java.util.UUID
+import scala.jdk.CollectionConverters.SeqHasAsJava
 import scala.util.{Failure, Try, Using}
 
 object ProvAlimentoService {
-  def getAllAlimentos: List[ProveedorAlimento] = {
+  def getAllAlimentos: java.util.List[ProveedorAlimento] = {
     try {
       DatabaseConnection.withConnection { conn =>
         val query = "SELECT * FROM v_aliment"
@@ -32,7 +33,7 @@ object ProvAlimentoService {
               rs.getString("tipo_alimento")
             )
           }
-          proveedores.toList
+          proveedores.toList.asJava
         } finally {
           if (rs != null) rs.close()
           if (stmt != null) stmt.close()

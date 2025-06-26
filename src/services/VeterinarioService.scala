@@ -5,9 +5,10 @@ import utils.DatabaseConnection
 import java.sql.{CallableStatement, PreparedStatement, ResultSet, SQLException}
 import java.util.UUID
 import scala.util.{Failure, Try, Using}
+import scala.jdk.CollectionConverters._
 
 object VeterinarioService {
-  def getAllVet: List[Veterinario] = {
+  def getAllVet: java.util.List[Veterinario] = {
     try {
       DatabaseConnection.withConnection { conn =>
         val query = "SELECT * FROM v_vets"
@@ -33,7 +34,7 @@ object VeterinarioService {
               rs.getString("nombre_clinica")
             )
           }
-          veterinarios.toList
+          veterinarios.toList.asJava
         } finally {
           if (rs != null) rs.close()
           if (stmt != null) stmt.close()
@@ -57,7 +58,7 @@ object VeterinarioService {
                  especialidad: String,
                  modalidad: String,
                  clinica: Int
-               ): Unit = {
+               ): String = {
     try {
       DatabaseConnection.withConnection { conn =>
         val query = "SELECT * FROM public.insert_proveedor_veterinario(?, ?, ?, ?, ?, ?, ?, ?, ?)"
@@ -79,6 +80,8 @@ object VeterinarioService {
           if (!rs.next()) {
             throw new SQLException("No se pudo crear el veterinario: el procedimiento no devolvió resultados")
           }
+          else
+            rs.getString("provedor_id")
         } finally {
           if (stmt != null) stmt.close()
         }
