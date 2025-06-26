@@ -4,12 +4,13 @@ import models.Animal
 import utils.DatabaseConnection
 
 import java.sql.{CallableStatement, PreparedStatement, ResultSet, SQLException, Statement}
-import java.util.{Date => UtilDate, UUID}
-import java.sql.{Date => SqlDate}
+import java.util.{UUID, Date as UtilDate}
+import java.sql.Date as SqlDate
+import scala.collection.JavaConverters.{asJavaIterableConverter, seqAsJavaListConverter}
 import scala.util.{Try, Using}
 
 object AnimalService {
-  def getAllAnimal: List[Animal] = {
+  def getAllAnimal: java.util.List[Animal] = {
     try {
       DatabaseConnection.withConnection { conn =>
         var stmt: Statement = null
@@ -34,7 +35,7 @@ object AnimalService {
               rs.getDate("fecha_ingreso")
             )
           }
-          animales.toList
+          animales.toList.asJava
         } finally {
           if (rs != null) rs.close()
           if (stmt != null) stmt.close()

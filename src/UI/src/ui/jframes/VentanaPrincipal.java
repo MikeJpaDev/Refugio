@@ -3,6 +3,7 @@ package ui.jframes;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import ui.jpanels.AlimPanel;
+import ui.jpanels.AnimalPanel;
 import ui.jpanels.ComPanel;
 import ui.jpanels.VetPanel;
 
@@ -35,26 +36,37 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         ContentPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         ProvMenu = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        AnimalMenu = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema Refugio");
         setResizable(false);
 
+        jLabel1.setIcon(new javax.swing.ImageIcon("E:\\CUJAE\\2do año\\2do Semestre\\BD\\Proyecto Refugio\\Refugio\\src\\UI\\src\\extras\\icons\\principal.png")); // NOI18N
+        jLabel1.setText("jLabel1");
+
         javax.swing.GroupLayout ContentPanelLayout = new javax.swing.GroupLayout(ContentPanel);
         ContentPanel.setLayout(ContentPanelLayout);
         ContentPanelLayout.setHorizontalGroup(
             ContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 850, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 850, Short.MAX_VALUE)
         );
         ContentPanelLayout.setVerticalGroup(
             ContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 577, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 577, Short.MAX_VALUE)
         );
 
         ProvMenu.setText("Proveedor");
@@ -83,10 +95,52 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         ProvMenu.add(jMenuItem3);
 
+        jMenuItem4.setText("Contratos");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        ProvMenu.add(jMenuItem4);
+
+        jMenuItem5.setText("Servicios");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        ProvMenu.add(jMenuItem5);
+
         jMenuBar1.add(ProvMenu);
 
-        AnimalMenu.setText("Animal");
-        jMenuBar1.add(AnimalMenu);
+        jMenu4.setText("Animal");
+
+        jMenuItem6.setText("Ver Animales");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem6);
+
+        jMenuItem7.setText("Donaciones");
+        jMenu4.add(jMenuItem7);
+
+        jMenuItem8.setText("Adopciones");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem8);
+
+        jMenuBar1.add(jMenu4);
+
+        jMenu2.setText("Actividades");
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Reportes");
+        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
@@ -98,7 +152,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ContentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(ContentPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -116,14 +170,38 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         cambiarPanel(new ComPanel());
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        cambiarPanel(new AnimalPanel());
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    javax.swing.JMenu AnimalMenu;
     javax.swing.JPanel ContentPanel;
     javax.swing.JMenu ProvMenu;
+    javax.swing.JLabel jLabel1;
+    javax.swing.JMenu jMenu2;
+    javax.swing.JMenu jMenu3;
+    javax.swing.JMenu jMenu4;
     javax.swing.JMenuBar jMenuBar1;
     javax.swing.JMenuItem jMenuItem1;
     javax.swing.JMenuItem jMenuItem2;
     javax.swing.JMenuItem jMenuItem3;
+    javax.swing.JMenuItem jMenuItem4;
+    javax.swing.JMenuItem jMenuItem5;
+    javax.swing.JMenuItem jMenuItem6;
+    javax.swing.JMenuItem jMenuItem7;
+    javax.swing.JMenuItem jMenuItem8;
     // End of variables declaration//GEN-END:variables
 
     private void cambiarPanel(JPanel nuevoPanel){
@@ -132,5 +210,4 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ContentPanel.revalidate();
         ContentPanel.repaint();
     }
-
 }

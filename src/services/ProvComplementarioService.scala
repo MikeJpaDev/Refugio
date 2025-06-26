@@ -5,10 +5,11 @@ import utils.DatabaseConnection
 
 import java.sql.{CallableStatement, PreparedStatement, ResultSet, SQLException}
 import java.util.UUID
+import scala.collection.JavaConverters.seqAsJavaListConverter
 import scala.util.{Failure, Try, Using}
 
 object ProvComplementarioService {
-  def getAllComplementarios: List[ProveedorComplementario] = {
+  def getAllComplementarios: java.util.List[ProveedorComplementario] = {
     try {
       DatabaseConnection.withConnection { conn =>
         val query = "SELECT * FROM v_complementario"
@@ -32,7 +33,7 @@ object ProvComplementarioService {
               rs.getString("tipo_complementario")
             )
           }
-          proveedores.toList
+          proveedores.toList.asJava
         } finally {
           if (rs != null) rs.close()
           if (stmt != null) stmt.close()

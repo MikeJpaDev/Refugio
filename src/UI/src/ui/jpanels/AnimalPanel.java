@@ -5,11 +5,11 @@
 package ui.jpanels;
 
 import UI.src.ui.utils.AlimTableModel;
-import UI.src.ui.utils.CompTableModel;
+import UI.src.ui.utils.AnimalTableModel;
+import models.Animal;
 import models.ProveedorAlimento;
-import models.ProveedorComplementario;
+import services.AnimalService;
 import services.ProvAlimentoService;
-import services.ProvComplementarioService;
 
 import java.util.List;
 
@@ -17,15 +17,16 @@ import java.util.List;
  *
  * @author pc8
  */
-public class ComPanel extends javax.swing.JPanel {
-    private static CompTableModel tableModel;
-    private List<ProveedorComplementario> lista;
+public class AnimalPanel extends javax.swing.JPanel {
     
-    public ComPanel() {
+    private static AnimalTableModel tableModel;
+    private List<Animal> lista;
+    
+    public AnimalPanel() {
         initComponents();
-        tableModel = new CompTableModel();
+        tableModel = new AnimalTableModel();
         llenarTabla();
-        compTable.setModel(tableModel);
+        animalTable.setModel(tableModel);
     }
 
     /**
@@ -38,7 +39,7 @@ public class ComPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        compTable = new javax.swing.JTable();
+        animalTable = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         verBtn = new javax.swing.JButton();
@@ -51,7 +52,7 @@ public class ComPanel extends javax.swing.JPanel {
         jPanel5 = new javax.swing.JPanel();
         borrarBtn = new javax.swing.JButton();
 
-        compTable.setModel(new javax.swing.table.DefaultTableModel(
+        animalTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -62,7 +63,7 @@ public class ComPanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(compTable);
+        jScrollPane1.setViewportView(animalTable);
 
         jPanel1.setLayout(new java.awt.GridLayout(5, 1));
 
@@ -246,9 +247,9 @@ public class ComPanel extends javax.swing.JPanel {
 
     private void llenarTabla(){
         limpiarTabla();
-        lista = ProvComplementarioService.getAllComplementarios();
-        for (ProveedorComplementario comp: lista) {
-            tableModel.agregarComp(comp.proveedor_id(), comp.nombre_proveedor(), comp.provincia(), comp.tipo_complementario(), comp.responsable());
+        lista = AnimalService.getAllAnimal();
+        for (Animal animal : lista) {
+            tableModel.agregarAnimal(animal.animal_id(), animal.nombre_animal(), animal.especie_nombre(), animal.raza());
         }
     }
 
@@ -262,8 +263,8 @@ public class ComPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CrearBtn;
     private javax.swing.JButton ModificarBtn;
+    private javax.swing.JTable animalTable;
     private javax.swing.JButton borrarBtn;
-    private javax.swing.JTable compTable;
     private javax.swing.JButton filtratBtn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

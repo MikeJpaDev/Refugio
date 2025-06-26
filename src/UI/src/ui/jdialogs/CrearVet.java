@@ -4,18 +4,24 @@
  */
 package ui.jdialogs;
 
+import models.Provincia;
+import utils.Utils;
+
+import javax.swing.*;
+import java.util.List;
+
 /**
  *
  * @author pc8
  */
 public class CrearVet extends javax.swing.JDialog {
-
-    /**
-     * Creates new form CrearVet
-     */
+    private List<Provincia> provincias;
+    
     public CrearVet(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        provincias = Utils.getAllProvincias();
         initComponents();
+        actualizarCmbProvincias();
     }
 
     /**
@@ -76,19 +82,11 @@ public class CrearVet extends javax.swing.JDialog {
 
         jLabel8.setText("Modalidad:");
 
-        nombreTxt.setText("jTextField1");
-
-        dirTxt.setText("jTextField1");
-
-        telTxt.setText("jTextField1");
-
-        emialTxt.setText("jTextField1");
-
-        modTxt.setText("jTextField1");
-
-        espTxt.setText("jTextField1");
-
-        respTxt.setText("jTextField1");
+        nombreTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreTxtActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText("Clinica");
 
@@ -275,38 +273,19 @@ public class CrearVet extends javax.swing.JDialog {
     }//GEN-LAST:event_contBtnActionPerformed
 
     private void cancelarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarBtnActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_cancelarBtnActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CrearVet.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CrearVet.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CrearVet.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CrearVet.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void nombreTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreTxtActionPerformed
 
-        /* Create and display the dialog */
-        
+    private void actualizarCmbProvincias() {
+        DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) provCmb.getModel();
+        model.removeAllElements();
+        for (Provincia prov: provincias){
+            model.addElement(prov.nombre());
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
