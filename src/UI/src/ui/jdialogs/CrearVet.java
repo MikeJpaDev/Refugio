@@ -4,11 +4,16 @@
  */
 package ui.jdialogs;
 
+import models.Clinica;
+import models.Especie;
 import models.Provincia;
+import services.VeterinarioService;
 import utils.Utils;
 
 import javax.swing.*;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -16,12 +21,30 @@ import java.util.List;
  */
 public class CrearVet extends javax.swing.JDialog {
     private List<Provincia> provincias;
+    private List<Clinica> clinicas;
+
+    private String detectarCampoDuplicado(SQLException e) {
+        String mensaje = e.getMessage();
+        
+        
+        if (mensaje.contains("nombre_index")) {
+            return "El nombre ya existe en la base de datos. Por favor, elija otro nombre.";
+        }
+        else if (mensaje.contains("email_index")) {
+            return "El correo electrónico ya está registrado.";
+        }
+        else {
+            return "Registro duplicado: " + mensaje;
+        }
+    }
     
     public CrearVet(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         provincias = Utils.getAllProvincias();
+        clinicas = Utils.getAllClinicas();
         initComponents();
         actualizarCmbProvincias();
+        actualizarCmbClinicas();
     }
 
     /**
@@ -55,8 +78,6 @@ public class CrearVet extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         cancelarBtn = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        contBtn = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         aceptarBtn = new javax.swing.JButton();
 
@@ -119,7 +140,7 @@ public class CrearVet extends javax.swing.JDialog {
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dirTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -195,57 +216,42 @@ public class CrearVet extends javax.swing.JDialog {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(cancelarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(74, 74, 74)
+                .addComponent(cancelarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(146, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(cancelarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(29, Short.MAX_VALUE)
+                .addComponent(cancelarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17))
         );
 
         jPanel2.add(jPanel3);
 
-        contBtn.setText("Agregar Contrato");
-        contBtn.addActionListener(new java.awt.event.ActionListener() {
+        aceptarBtn.setText("Aceptar");
+        aceptarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                contBtnActionPerformed(evt);
+                aceptarBtnActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(contBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(contBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        jPanel2.add(jPanel4);
-
-        aceptarBtn.setText("Aceptar");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(aceptarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(130, Short.MAX_VALUE)
+                .addComponent(aceptarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(90, 90, 90))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(aceptarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addComponent(aceptarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16))
         );
 
         jPanel2.add(jPanel7);
@@ -261,24 +267,59 @@ public class CrearVet extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void contBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_contBtnActionPerformed
-
     private void cancelarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarBtnActionPerformed
         this.dispose();
     }//GEN-LAST:event_cancelarBtnActionPerformed
 
     private void nombreTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreTxtActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_nombreTxtActionPerformed
+
+    private void aceptarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarBtnActionPerformed
+        try {
+            validarCampos();
+            String nombre = nombreTxt.getText();
+            String direccion = dirTxt.getText();
+            String tel = telTxt.getText();
+            String email = emialTxt.getText();
+            int provincia = provincias.get(provCmb.getSelectedIndex()).id();
+            String resp = respTxt.getText();
+            String esp = espTxt.getText();
+            String mod = modTxt.getText();
+            int clinica = clinicas.get(clinicaCmb.getSelectedIndex()).id();
+            
+            String result = VeterinarioService.createVet(nombre, direccion, tel, email, provincia, resp, esp, mod, clinica);
+            if(result == null)
+                throw new SQLException("Problemas en la BD");
+            this.hide();
+            JOptionPane.showMessageDialog(null, "Creado Correctamente", "Creado Satisfactoriamente", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+        }
+        catch (IllegalArgumentException e){
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
+        }
+        catch (SQLException e1){
+            String mensajeError = "Error de base de datos: ";
+            
+            if (e1.getSQLState().equals("23505")) {
+                mensajeError += detectarCampoDuplicado(e1);
+            }
+            else {
+                mensajeError += e1.getMessage();
+            }
+
+            JOptionPane.showMessageDialog(null, mensajeError, "Error de base de datos", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_aceptarBtnActionPerformed
+
+    
 
     private void actualizarCmbProvincias() {
         DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) provCmb.getModel();
@@ -288,11 +329,89 @@ public class CrearVet extends javax.swing.JDialog {
         }
     }
 
+    private void actualizarCmbClinicas() {
+        DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) clinicaCmb.getModel();
+        model.removeAllElements();
+        for (Clinica clin: clinicas){
+            model.addElement(clin.nombre());
+        }
+    }
+
+
+    public boolean validarCampos() {
+        try {
+            validarCampo(nombreTxt, "Nombre", 150);
+            validarCampo(dirTxt, "Dirección", 250);
+            validarCampo(respTxt, "Responsable", 250);
+            validarTelefono(telTxt.getText().trim());
+            validarEmail(emialTxt.getText().trim());
+
+            // Validar campos adicionales (si es necesario)
+            if (espTxt.getText().trim().isEmpty()) {
+                throw new IllegalArgumentException("Especialidad no puede estar vacía");
+            }
+            if (modTxt.getText().trim().isEmpty()) {
+                throw new IllegalArgumentException("Modalidad no puede estar vacía");
+            }
+
+            return true;
+
+        } catch (IllegalArgumentException e) {
+            throw e;
+        }
+    }
+
+    // Validar campos de texto genéricos
+    private void validarCampo(JTextField campo, String nombreCampo, int maxLongitud) {
+        String texto = campo.getText().trim();
+
+        if (texto.isEmpty()) {
+            throw new IllegalArgumentException(nombreCampo + " no puede estar vacío");
+        }
+
+        if (texto.length() > maxLongitud) {
+            throw new IllegalArgumentException(nombreCampo + " no puede tener más de " + maxLongitud + " caracteres");
+        }
+    }
+
+    // Validar teléfono
+    private void validarTelefono(String telefono) {
+        if (telefono.isEmpty()) {
+            throw new IllegalArgumentException("Teléfono no puede estar vacío");
+        }
+
+        // Remover espacios, guiones, paréntesis, etc.
+        String numeroLimpio = telefono.replaceAll("[^0-9]", "");
+
+        if (!numeroLimpio.matches("\\d+")) {
+            throw new IllegalArgumentException("Teléfono debe contener solo números");
+        }
+
+        if (numeroLimpio.length() > 9) {
+            throw new IllegalArgumentException("Teléfono debe tener máximo 9 dígitos");
+        }
+    }
+
+    // Validar email
+    private void validarEmail(String email) {
+        if (email.isEmpty()) {
+            throw new IllegalArgumentException("Email no puede estar vacío");
+        }
+
+        // Expresión regular para validar email
+        String regex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        Pattern pattern = Pattern.compile(regex);
+
+        if (!pattern.matcher(email).matches()) {
+            throw new IllegalArgumentException("Email no tiene un formato válido");
+        }
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aceptarBtn;
     private javax.swing.JButton cancelarBtn;
     private javax.swing.JComboBox<String> clinicaCmb;
-    private javax.swing.JButton contBtn;
     private javax.swing.JTextField dirTxt;
     private javax.swing.JTextField emialTxt;
     private javax.swing.JTextField espTxt;
@@ -308,7 +427,6 @@ public class CrearVet extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JTextField modTxt;
     private javax.swing.JTextField nombreTxt;

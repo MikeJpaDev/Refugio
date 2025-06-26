@@ -266,6 +266,7 @@ public class VetPanel extends javax.swing.JPanel {
             public void run() {
                 CrearVet dialog = new CrearVet(new javax.swing.JFrame(), true);
                 dialog.setVisible(true);
+                llenarTabla();
             }
         });
     }//GEN-LAST:event_CrearBtnActionPerformed

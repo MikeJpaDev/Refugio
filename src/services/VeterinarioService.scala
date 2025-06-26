@@ -87,8 +87,7 @@ object VeterinarioService {
         }
       }
     } catch {
-      case e: SQLException =>
-        throw new SQLException(s"Error creando veterinario: ${e.getMessage}", e)
+      case e: SQLException => throw e
       case e: Exception =>
         throw new Exception(s"Error inesperado creando veterinario: ${e.getMessage}", e)
     }

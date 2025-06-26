@@ -1,6 +1,6 @@
 package utils
 
-import models.Provincia
+import models.{Clinica, Especie, Provincia}
 
 import java.sql.{Date, PreparedStatement, ResultSet, SQLException}
 import java.text.SimpleDateFormat
@@ -43,6 +43,72 @@ object Utils {
         throw new SQLException(s"Error obteniendo actividades: ${e.getMessage}", e)
       case e: Exception =>
         throw new Exception(s"Error inesperado obteniendo actividades: ${e.getMessage}", e)
+    }
+  }
+
+  def getAllEspecies(): java.util.List[Especie] = {
+    try {
+      DatabaseConnection.withConnection { conn =>
+        val query = "SELECT * FROM especie"
+        var stmt: PreparedStatement = null
+        var rs: ResultSet = null
+
+        try {
+          stmt = conn.prepareStatement(query)
+          rs = stmt.executeQuery()
+
+          val especies = new ListBuffer[Especie]
+          while (rs.next()) {
+            especies += Especie(
+              rs.getString("especie_nombre"),
+              rs.getInt("especie_id")
+            )
+          }
+          especies.toList.asJava
+        } finally {
+          if (rs != null) rs.close()
+          if (stmt != null) stmt.close()
+        }
+      }
+    }
+    catch {
+      case e: SQLException =>
+        throw new SQLException(s"Error obteniendo especies: ${e.getMessage}", e)
+      case e: Exception =>
+        throw new Exception(s"Error inesperado obteniendo especies: ${e.getMessage}", e)
+    }
+  }
+
+  def getAllClinicas(): java.util.List[Clinica] = {
+    try {
+      DatabaseConnection.withConnection { conn =>
+        val query = "SELECT * FROM clinica"
+        var stmt: PreparedStatement = null
+        var rs: ResultSet = null
+
+        try {
+          stmt = conn.prepareStatement(query)
+          rs = stmt.executeQuery()
+
+          val clinicas = new ListBuffer[Clinica]
+          while (rs.next()) {
+            clinicas += Clinica(
+              rs.getInt("id"),
+              rs.getString("nombre_clinica")
+            )
+          }
+          clinicas.toList.asJava
+        } finally {
+          if (rs != null) rs.close()
+          if (stmt != null) stmt.close()
+        }
+      }
+    }
+    catch {
+      case e: SQLException =>
+        throw new SQLException(s"Error obteniendo especies: ${e.getMessage}", e)
+      case e: Exception =>
+        throw new Exception(s"Error inesperado obteniendo especies: ${e.getMessage}", e)
     }
   }
 }
