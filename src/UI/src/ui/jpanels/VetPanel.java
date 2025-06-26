@@ -17,6 +17,7 @@ import utils.Reports;
 
 import javax.swing.*;
 import ui.jdialogs.CrearVet;
+import ui.jdialogs.FiltroVet;
 
 /**
  *
@@ -254,7 +255,17 @@ public class VetPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_verBtnActionPerformed
 
     private void filtratBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtratBtnActionPerformed
-        // TODO add your handling code here:
+        lista = VeterinarioService.getAllVet();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                FiltroVet dialog = new FiltroVet(new javax.swing.JFrame(), true, lista);
+                dialog.setVisible(true);
+                limpiarTabla();
+                for (Veterinario vet : dialog.getLista()) {
+                    tableModel.agregarVet(vet.nombre_proveedor(), vet.provincia(), vet.responsable(), vet.especialidad(), vet.modalidad());
+                }
+            }
+        });
     }//GEN-LAST:event_filtratBtnActionPerformed
 
     private void ModificarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarBtnActionPerformed
