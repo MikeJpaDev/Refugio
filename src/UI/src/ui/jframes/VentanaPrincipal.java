@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import ui.jpanels.AlimPanel;
 import ui.jpanels.AnimalPanel;
 import ui.jpanels.ComPanel;
+import ui.jpanels.ContratoPanel;
 import ui.jpanels.VetPanel;
 
 /*
@@ -43,7 +44,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
@@ -102,14 +102,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
         ProvMenu.add(jMenuItem4);
-
-        jMenuItem5.setText("Servicios");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
-            }
-        });
-        ProvMenu.add(jMenuItem5);
 
         jMenuBar1.add(ProvMenu);
 
@@ -171,12 +163,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
+        cambiarPanel(new ContratoPanel());
     }//GEN-LAST:event_jMenuItem4ActionPerformed
-
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
@@ -198,7 +186,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     javax.swing.JMenuItem jMenuItem2;
     javax.swing.JMenuItem jMenuItem3;
     javax.swing.JMenuItem jMenuItem4;
-    javax.swing.JMenuItem jMenuItem5;
     javax.swing.JMenuItem jMenuItem6;
     javax.swing.JMenuItem jMenuItem7;
     javax.swing.JMenuItem jMenuItem8;

@@ -111,4 +111,8 @@ object Utils {
         throw new Exception(s"Error inesperado obteniendo especies: ${e.getMessage}", e)
     }
   }
+
+  def convertirScalaAJavaList[A](listaScala: List[A]): java.util.List[A] = {
+    listaScala.asJava.asInstanceOf[java.util.List[A]]
+  }
 }

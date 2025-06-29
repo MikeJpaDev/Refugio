@@ -1,16 +1,18 @@
 package services
 import models.{Proveedor, ProveedorAlimento, ProveedorComplementario, Veterinario}
-import utils.DatabaseConnection
+import utils.{DatabaseConnection, Utils}
 
 import java.sql.SQLException
 import java.util.UUID
+import scala.collection.JavaConverters.{asJavaCollectionConverter, asJavaIterableConverter}
 import scala.util.{Failure, Try, Using}
 
 object ProveedorService {
-  def getAllProveedor(): List[Proveedor] = DatabaseConnection.withConnection {conn =>
+  def getAllProveedor(): java.util.List[Proveedor] = DatabaseConnection.withConnection {conn =>
     val statement = conn.createStatement()
     val resultSet = statement.executeQuery("SELECT * FROM proveedor pv JOIN provincia pr on pv.provincia_fk = pr.provincia_id JOIN tipo_proveedor tp on tp.id = pv.tipo_proveedor_fk LEFT JOIN proveedor_veterinario pvt on pvt.proveedor_id = pv.proveedor_id LEFT JOIN proveedor_complementario pc on pc.proveedor_id = pv.proveedor_id LEFT JOIN proveedor_alimento pa on pa.proveedor_id = pv.proveedor_id LEFT JOIN clinica c on pvt.clinica_fk = c.id;");
 
+    Utils.convertirScalaAJavaList(
     Iterator.continually(resultSet)
       .takeWhile(_.next())
       .map(rs => {
@@ -64,7 +66,7 @@ object ProveedorService {
             s"Tipo de proveedor desconocido: $tipoProv"
           )
         }
-      }).toList
+      }).toList)
   }
 
   import java.sql.{SQLException, CallableStatement}

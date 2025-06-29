@@ -5,7 +5,16 @@
 package ui.jdialogs;
 
 import UI.src.ui.utils.Util;
+import models.Especie;
+import models.Provincia;
+import services.AnimalService;
+import utils.Utils;
+
+import javax.swing.*;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -13,11 +22,14 @@ import java.util.Date;
  */
 public class CrearAnimal extends javax.swing.JDialog {
 
+    private List<Especie> especies;
     private Date fechaIng;
     private Date fechaNac;
     public CrearAnimal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        especies = Utils.getAllEspecies();
+        actualizarCmbEspecies();
     }
 
     /**
@@ -44,8 +56,9 @@ public class CrearAnimal extends javax.swing.JDialog {
         jButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        provCmb = new javax.swing.JComboBox<>();
-        jSpinner1 = new javax.swing.JSpinner();
+        especCmb = new javax.swing.JComboBox<>();
+        pesoSpinner = new javax.swing.JSpinner();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -98,6 +111,11 @@ public class CrearAnimal extends javax.swing.JDialog {
         });
 
         jButton1.setText("Seleccionar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Seleccionar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -106,11 +124,15 @@ public class CrearAnimal extends javax.swing.JDialog {
             }
         });
 
-        jLabel5.setText("Peso:");
+        jLabel5.setText("Kg");
 
         jLabel6.setText("Especie:");
 
-        provCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        especCmb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        pesoSpinner.setModel(new javax.swing.SpinnerNumberModel(1.0d, 1.0d, null, 0.5d));
+
+        jLabel7.setText("Peso:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -119,6 +141,10 @@ public class CrearAnimal extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(especCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -134,19 +160,17 @@ public class CrearAnimal extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(jButton2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(provCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(fechaIngTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)))
+                        .addComponent(jButton1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(pesoSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(17, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(48, 48, 48)
@@ -181,11 +205,12 @@ public class CrearAnimal extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(provCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(especCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pesoSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(aceptarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -218,12 +243,30 @@ public class CrearAnimal extends javax.swing.JDialog {
     }//GEN-LAST:event_cancelarBtnActionPerformed
 
     private void aceptarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarBtnActionPerformed
-        /*try {
+        try {
             validarCampos();
             String nombre = nombreTxt.getText();
-            String direccion = razaTxt.getText();
+            String raza = razaTxt.getText();
+            double peso = ((Number)pesoSpinner.getValue()).doubleValue();
+            int especie = especies.get(especCmb.getSelectedIndex()).especie_id();
 
-            ProvAlimentoService.createProveedorAlimento(nombre, direccion, tel, email, provincia, res,alim );
+            if (fechaNac == null || fechaIng == null) {
+                throw new IllegalArgumentException("No pueden haber campos vacios");
+            }
+
+            Date hoy = new Date();
+
+            // 1. Fecha inicio no puede ser después de fecha fin
+            if (fechaNac.after(fechaIng)) {
+                throw new IllegalArgumentException("La fecha de nacimiento no puede ser despues de la fecha de ingreso");
+            }
+
+            // 2. Ninguna fecha puede ser mayor que hoy
+            if (fechaNac.after(hoy) || fechaIng.after(hoy)) {
+                throw new IllegalArgumentException("Las fechas no pueden ser despues a la fecha actual");
+            }
+
+            AnimalService.createAnimal(nombre, especie, raza, fechaNac, peso, fechaIng);
             this.hide();
             JOptionPane.showMessageDialog(null, "Creado Correctamente", "Creado Satisfactoriamente", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
@@ -234,15 +277,8 @@ public class CrearAnimal extends javax.swing.JDialog {
         catch (SQLException e1){
             String mensajeError = "Error de base de datos: ";
 
-            if (e1.getSQLState().equals("23505")) {
-                mensajeError += detectarCampoDuplicado(e1);
-            }
-            else {
-                mensajeError += e1.getMessage();
-            }
-
             JOptionPane.showMessageDialog(null, mensajeError, "Error de base de datos", JOptionPane.ERROR_MESSAGE);
-        }*/
+        }
     }//GEN-LAST:event_aceptarBtnActionPerformed
 
     private void fechaNacTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaNacTxtActionPerformed
@@ -258,17 +294,24 @@ public class CrearAnimal extends javax.swing.JDialog {
             public void run() {
                 SelctFecha dialog = new SelctFecha(new javax.swing.JFrame(), true);
                 dialog.setVisible(true);
-                fechaIng = dialog.getFecha();
-                if(fechaIng != null)
-                    fechaIngTxt.setText(Util.formatFecha(fechaIng));
-                System.out.println(Util.formatFecha(fechaIng));
+                fechaNac = dialog.getFecha();
+                if(fechaNac != null)
+                    fechaNacTxt.setText(Util.formatFecha(fechaNac));
             }
         });
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                SelctFecha dialog = new SelctFecha(new javax.swing.JFrame(), true);
+                dialog.setVisible(true);
+                fechaIng = dialog.getFecha();
+                if(fechaIng != null)
+                    fechaIngTxt.setText(Util.formatFecha(fechaIng));
+            }
+        });
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public boolean validarCampos() {
         try {
@@ -280,11 +323,19 @@ public class CrearAnimal extends javax.swing.JDialog {
             throw e;
         }
     }
-    
+
+    private void actualizarCmbEspecies() {
+        DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) especCmb.getModel();
+        model.removeAllElements();
+        for (Especie esp : especies){
+            model.addElement(esp.especie_nombre());
+        }
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aceptarBtn;
     private javax.swing.JButton cancelarBtn;
+    private javax.swing.JComboBox<String> especCmb;
     private javax.swing.JTextField fechaIngTxt;
     private javax.swing.JTextField fechaNacTxt;
     private javax.swing.JButton jButton1;
@@ -295,10 +346,10 @@ public class CrearAnimal extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextField nombreTxt;
-    private javax.swing.JComboBox<String> provCmb;
+    private javax.swing.JSpinner pesoSpinner;
     private javax.swing.JTextField razaTxt;
     // End of variables declaration//GEN-END:variables
 }

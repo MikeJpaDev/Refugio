@@ -1,16 +1,17 @@
 package services
-import models.{Contrato, Servicio}
+import models.{Contrato, ContratoTable, Servicio}
 import utils.DatabaseConnection
 
 import java.sql.{CallableStatement, Date, PreparedStatement, ResultSet, SQLException}
 import java.util.UUID
+import scala.collection.JavaConverters.{asJavaIterableConverter, seqAsJavaListConverter}
 import scala.util.{Try, Using}
 
 object ContratoService {
-  def getAllContratos: List[Contrato] = {
+  def getAllContratos: java.util.List[ContratoTable] = {
     try {
       DatabaseConnection.withConnection { conn =>
-        val query = "SELECT * FROM contrato"
+        val query = "SELECT * FROM v_contrato_prov"
         var stmt: PreparedStatement = null
         var rs: ResultSet = null
 
@@ -18,22 +19,22 @@ object ContratoService {
           stmt = conn.prepareStatement(query)
           rs = stmt.executeQuery()
 
-          val contratos = new scala.collection.mutable.ListBuffer[Contrato]()
+          val contratos = new scala.collection.mutable.ListBuffer[ContratoTable]()
           while (rs.next()) {
             val contratoId = rs.getInt("contrato_id")
             val proveedorId = rs.getString("proveedor_id")
 
-            contratos += Contrato(
+            contratos += ContratoTable(
               contratoId,
               proveedorId,
+              rs.getString("nombre_proveedor"),
               rs.getDate("fecha_inicio"),
               rs.getDate("fecha_fin"),
               rs.getDate("fecha_conciliacion"),
-              rs.getString("descripcion"),
-              ServicioService.getAllServicioByContrato(contratoId, proveedorId)
+              rs.getString("descripcion")
             )
           }
-          contratos.toList
+          contratos.toList.asJava
         } finally {
           if (rs != null) rs.close()
           if (stmt != null) stmt.close()

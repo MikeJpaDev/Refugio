@@ -13,10 +13,6 @@ public class Util {
 
         String nombreLimpio = texto.replaceAll("[^0-9]", "");
 
-        if(!texto.matches("^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]+$")){
-            throw new IllegalArgumentException(nombreCampo + " no puede tener caracteres especiales");
-        }
-
         if(!nombreLimpio.isEmpty()){
             throw new IllegalArgumentException(nombreCampo + " no puede tener caracteres numéricos");
         }
@@ -27,6 +23,10 @@ public class Util {
 
         if (texto.length() > maxLongitud) {
             throw new IllegalArgumentException(nombreCampo + " no puede tener más de " + maxLongitud + " caracteres");
+        }
+
+        if(!texto.matches("^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]+$")){
+            throw new IllegalArgumentException(nombreCampo + " no puede tener caracteres especiales");
         }
     }
 
@@ -88,5 +88,13 @@ public class Util {
 
             // Formatear la fecha
             return formatterSalida.format(fecha);
+    }
+
+    public static java.sql.Date convertirFecha(java.util.Date fechaUtil) {
+        if (fechaUtil == null) {
+            return null;
+        }
+        fechaUtil.setTime(fechaUtil.getTime() - fechaUtil.getTime() % (24 * 60 * 60 * 1000));
+        return new java.sql.Date(fechaUtil.getTime());
     }
 }

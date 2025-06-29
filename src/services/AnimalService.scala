@@ -49,6 +49,7 @@ object AnimalService {
     }
   }
 
+  @throws(classOf[SQLException])
   def createAnimal(
                     nombre_animal: String,
                     especie_id: Int,
