@@ -47,7 +47,8 @@ object ProvAlimentoService {
     }
   }
 
-  def createProveedorAlimento(
+  @throws(classOf[SQLException])
+  def createProveedorAlimento (
                                nombre_proveedor: String,
                                direccion: String,
                                telefono: String,
@@ -72,16 +73,13 @@ object ProvAlimentoService {
           stmt.setString(7, tipo_alimento)
 
           val rs = stmt.executeQuery()
-          if (!rs.next()) {
-            throw new SQLException("No se pudo crear el proveedor de alimento: el procedimiento no devolvió resultados")
-          }
         } finally {
           if (stmt != null) stmt.close()
         }
       }
     } catch {
       case e: SQLException =>
-        throw new SQLException(s"Error creando proveedor de alimento: ${e.getMessage}", e)
+        throw e;
       case e: Exception =>
         throw new Exception(s"Error inesperado creando proveedor de alimento: ${e.getMessage}", e)
     }

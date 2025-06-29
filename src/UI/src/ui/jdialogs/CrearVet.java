@@ -343,6 +343,8 @@ public class CrearVet extends javax.swing.JDialog {
             validarCampo(nombreTxt, "Nombre", 150);
             validarCampo(dirTxt, "Dirección", 250);
             validarCampo(respTxt, "Responsable", 250);
+            validarCampo(modTxt, "Modalidad", 150);
+            validarCampo(espTxt, "Especialidad", 150);
             validarTelefono(telTxt.getText().trim());
             validarEmail(emialTxt.getText().trim());
 
@@ -365,6 +367,14 @@ public class CrearVet extends javax.swing.JDialog {
     private void validarCampo(JTextField campo, String nombreCampo, int maxLongitud) {
         String texto = campo.getText().trim();
 
+        String nombreLimpio = texto.replaceAll("[^0-9]", "");
+
+        System.out.println(nombreLimpio);
+        System.out.println(texto);
+        if(!nombreLimpio.isEmpty()){
+            throw new IllegalArgumentException(nombreCampo + " no puede tener caracteres numéricos");
+        }
+        
         if (texto.isEmpty()) {
             throw new IllegalArgumentException(nombreCampo + " no puede estar vacío");
         }
@@ -387,8 +397,12 @@ public class CrearVet extends javax.swing.JDialog {
             throw new IllegalArgumentException("Teléfono debe contener solo números");
         }
 
-        if (numeroLimpio.length() > 9) {
-            throw new IllegalArgumentException("Teléfono debe tener máximo 9 dígitos");
+        if(!numeroLimpio.equals(telefono)){
+            throw new IllegalArgumentException("Teléfono solo puede contener caracteres numéricos");
+        }
+        
+        if (numeroLimpio.length() > 9 || numeroLimpio.length() < 8) {
+            throw new IllegalArgumentException("Teléfono debe tener máximo 9 dígitos y minimo 7");
         }
     }
 

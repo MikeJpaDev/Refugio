@@ -47,6 +47,7 @@ object ProvComplementarioService {
     }
   }
 
+  @throws(classOf[SQLException])
   def createComplementario(
                             nombreProveedor: String,
                             direccion: String,
