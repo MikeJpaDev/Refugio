@@ -5,10 +5,11 @@ import java.util.List;
 import javax.swing.*;
 
 import UI.src.ui.GenPdf;
-import UI.src.ui.utils.ActividadTableModel;
-import UI.src.ui.utils.RepoVetTableModel;
-import UI.src.ui.utils.Util;
+import UI.src.ui.utils.*;
 import models.ActividadTable;
+import reports.ReportAlim;
+import reports.ReportComp;
+import reports.ReportVetAct;
 import reports.ReportVets;
 import services.ActividadService;
 import services.Reportes;
@@ -69,6 +70,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         actividadMenu = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         vetRepo = new javax.swing.JMenuItem();
+        repALim = new javax.swing.JMenuItem();
+        repoComp = new javax.swing.JMenuItem();
+        repVetAct = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema Refugio");
@@ -197,6 +202,33 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jMenu3.add(vetRepo);
 
+        repALim.setText("Reporte Alimentos");
+        repALim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                repALimActionPerformed(evt);
+            }
+        });
+        jMenu3.add(repALim);
+
+        repoComp.setText("Reporte Complementario");
+        repoComp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                repoCompActionPerformed(evt);
+            }
+        });
+        jMenu3.add(repoComp);
+
+        repVetAct.setText("Reporte Veterinarios Activos");
+        repVetAct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                repVetActActionPerformed(evt);
+            }
+        });
+        jMenu3.add(repVetAct);
+
+        jMenuItem13.setText("jMenuItem13");
+        jMenu3.add(jMenuItem13);
+
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -283,6 +315,62 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_vetRepoActionPerformed
 
+    private void repALimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_repALimActionPerformed
+        try{
+            RepoAlimTableModel tableModel = new RepoAlimTableModel();
+            javax.swing.JTable actTable = new javax.swing.JTable();
+            actTable.setModel(tableModel);
+            List <ReportAlim> lista = Reportes.getRepAlim();
+            for (ReportAlim act: lista) {
+                tableModel.agregarRepop(act.nombre_proveedor(),act.direccion(), act.provincia(), act.tipoAlimento(), Util.formatFecha(act.fechaInicio()), Util.formatFecha(act.fechaFin()), Util.formatFecha(act.fechaConc()), act.descripc());
+            }
+            GenPdf.exportTableToPDF(actTable, "Reporte_Alim.pdf");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_repALimActionPerformed
+
+    private void repoCompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_repoCompActionPerformed
+        try{
+            RepoCompTableModel tableModel = new RepoCompTableModel();
+            javax.swing.JTable actTable = new javax.swing.JTable();
+            actTable.setModel(tableModel);
+            List <ReportComp> lista = Reportes.getRepComp();
+            for (ReportComp act: lista) {
+                tableModel.agregarRepop(act.nombreProv(), Util.formatFecha(act.fechaInicio()), Util.formatFecha(act.fechaFin()), Util.formatFecha(act.fechaConc()), act.descripc(), act.descripc(), act.suma());
+            }
+            GenPdf.exportTableToPDF(actTable, "Reporte_Comp.pdf");
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_repoCompActionPerformed
+
+    private void repVetActActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_repVetActActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                ui.jdialogs.SelectClinoProv dialog = new ui.jdialogs.SelectClinoProv(new javax.swing.JFrame(), true);
+                dialog.setVisible(true);
+                int prov = dialog.getProv();
+                int clin = dialog.getClin();
+                try{
+                    RepoVetActTableModel tableModel = new RepoVetActTableModel();
+                    javax.swing.JTable actTable = new javax.swing.JTable();
+                    actTable.setModel(tableModel);
+                    List <ReportVetAct> lista = Reportes.getVetAct(prov, clin);
+                    for (ReportVetAct act: lista) {
+                        tableModel.agregarRepop(act.nombre_proveedor(), Util.formatFecha(act.fecha()), act.provincia(),act.especialidad(), act.clinica(), act.email(), act.modalidad());
+                    }
+                    GenPdf.exportTableToPDF(actTable, "Reporte_Vet_act.pdf");
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }//GEN-LAST:event_repVetActActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JPanel ContentPanel;
     javax.swing.JMenu ProvMenu;
@@ -294,6 +382,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     javax.swing.JMenu jMenu4;
     javax.swing.JMenuBar jMenuBar1;
     javax.swing.JMenuItem jMenuItem1;
+    javax.swing.JMenuItem jMenuItem13;
     javax.swing.JMenuItem jMenuItem2;
     javax.swing.JMenuItem jMenuItem3;
     javax.swing.JMenuItem jMenuItem4;
@@ -302,6 +391,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     javax.swing.JMenuItem jMenuItem7;
     javax.swing.JMenuItem jMenuItem8;
     javax.swing.JMenuItem jMenuItem9;
+    javax.swing.JMenuItem repALim;
+    javax.swing.JMenuItem repVetAct;
+    javax.swing.JMenuItem repoComp;
     javax.swing.JMenuItem transporteMenu;
     javax.swing.JMenuItem vetRepo;
     // End of variables declaration//GEN-END:variables
