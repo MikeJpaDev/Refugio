@@ -203,7 +203,7 @@ public class AdopcionPanel extends javax.swing.JPanel {
     private void CrearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearBtnActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ui.jdialogs.CrearContrato dialog = new CrearContrato(new javax.swing.JFrame(), true);
+                ui.jdialogs.CrearAdopcion dialog = new ui.jdialogs.CrearAdopcion(new javax.swing.JFrame(), true);
                 dialog.setVisible(true);
                 llenarTabla();
             }

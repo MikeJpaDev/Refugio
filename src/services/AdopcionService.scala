@@ -3,7 +3,8 @@ import models.{Actividad, Adopcion, Transporte}
 import utils.{DatabaseConnection, Utils}
 
 import java.beans.Statement
-import java.sql.{Date, PreparedStatement, ResultSet, SQLException}
+import java.sql.{Date, PreparedStatement, ResultSet, SQLException, Date as SqlDate}
+import java.util.UUID
 import scala.collection.mutable.ListBuffer
 
 object AdopcionService {
@@ -24,7 +25,7 @@ object AdopcionService {
               rs.getString("adopcion_id"),
               rs.getString("animal_id"),
               rs.getString("nombre_animal"),
-              rs.getDate("fecha_adopción"),
+              rs.getDate("fecha_adopcion"),
               rs.getDouble("precio")
             )
           }
@@ -47,7 +48,7 @@ object AdopcionService {
   @throws(classOf[SQLException])
   def createAdopcion(
                       animalId: String,
-                      fecha:Date,
+                      fecha: java.util.Date,
                       precio: Double
                       ): Unit = {
     try {
@@ -57,11 +58,11 @@ object AdopcionService {
             "VALUES (?, ?, ?) RETURNING adopcion_id;"
         var stmt: PreparedStatement = null
         var rs: ResultSet = null
-
+        val uuid = UUID.fromString(animalId)
         try {
           stmt = conn.prepareStatement(query)
-          stmt.setString(1, animalId)
-          stmt.setDate(2, fecha)
+          stmt.setObject(1, uuid)
+          stmt.setDate(2, new SqlDate(fecha.getTime))
           stmt.setDouble(3, precio)
 
           rs = stmt.executeQuery()
