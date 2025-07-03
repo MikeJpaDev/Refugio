@@ -26,7 +26,7 @@
               <Component id="jScrollPane1" min="-2" pref="762" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" pref="180" max="-2" attributes="0"/>
-              <EmptySpace pref="17" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -38,7 +38,7 @@
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
                   <Component id="jPanel1" pref="642" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="24" max="32767" attributes="0"/>
+              <EmptySpace pref="26" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -148,7 +148,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace pref="28" max="32767" attributes="0"/>
-                      <Component id="CrearBtn" min="-2" pref="128" max="-2" attributes="0"/>
+                      <Component id="crearBtn" min="-2" pref="128" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -157,14 +157,14 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="CrearBtn" min="-2" pref="57" max="-2" attributes="0"/>
+                      <Component id="crearBtn" min="-2" pref="57" max="-2" attributes="0"/>
                       <EmptySpace pref="39" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="CrearBtn">
+            <Component class="javax.swing.JButton" name="crearBtn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Crear"/>
                 <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
@@ -172,7 +172,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CrearBtnActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="crearBtnActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -184,7 +184,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                      <Component id="ModificarBtn" min="-2" pref="128" max="-2" attributes="0"/>
+                      <Component id="modificarBtn" min="-2" pref="128" max="-2" attributes="0"/>
                       <EmptySpace pref="26" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -193,14 +193,14 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                      <Component id="ModificarBtn" min="-2" pref="57" max="-2" attributes="0"/>
+                      <Component id="modificarBtn" min="-2" pref="57" max="-2" attributes="0"/>
                       <EmptySpace pref="35" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="ModificarBtn">
+            <Component class="javax.swing.JButton" name="modificarBtn">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Modificar"/>
                 <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
@@ -208,7 +208,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ModificarBtnActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modificarBtnActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

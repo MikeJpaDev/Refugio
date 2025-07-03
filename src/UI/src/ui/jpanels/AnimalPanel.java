@@ -23,7 +23,7 @@ public class AnimalPanel extends javax.swing.JPanel {
     private static AnimalTableModel tableModel;
     private List<Animal> lista;
     
-    public AnimalPanel() {
+    public AnimalPanel(int seguridad) {
         initComponents();
         tableModel = new AnimalTableModel();
         llenarTabla();

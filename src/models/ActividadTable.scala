@@ -10,5 +10,6 @@ case class ActividadTable(
                            descripcion: String,
                            horario: Timestamp,
                            proveedorId: String,
-                           proveedorNombre: String
+                           proveedorNombre: String,
+                           servicioDesc: String
                          )

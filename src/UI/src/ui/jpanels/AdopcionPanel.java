@@ -4,36 +4,35 @@
  */
 package ui.jpanels;
 
-import javax.swing.*;
-
-import UI.src.ui.utils.ActividadTableModel;
+import UI.src.ui.utils.AdopcionTableModel;
 import UI.src.ui.utils.AlimTableModel;
 import UI.src.ui.utils.Util;
-import models.ActividadTable;
+import models.Adopcion;
 import models.ProveedorAlimento;
-import services.ActividadService;
+import services.AdopcionService;
 import services.ProvAlimentoService;
-import ui.jdialogs.CrearAct;
 
+import javax.swing.*;
 import java.util.List;
+import ui.jdialogs.CrearContrato;
 
 /**
  *
  * @author pc8
  */
-public class ActividadPanel extends javax.swing.JPanel {
+public class AdopcionPanel extends javax.swing.JPanel {
 
-    private static ActividadTableModel tableModel;
-    private List<ActividadTable> lista;
+    private List<Adopcion> lista;
+    private static AdopcionTableModel tableModel;
     
     /**
-     * Creates new form ActividadPanel
+     * Creates new form AdopcionPanel
      */
-    public ActividadPanel() {
+    public AdopcionPanel() {
         initComponents();
-        tableModel = new ActividadTableModel();
+        tableModel = new AdopcionTableModel();
         llenarTabla();
-        actTable.setModel(tableModel);
+        contTable.setModel(tableModel);
     }
 
     /**
@@ -46,20 +45,17 @@ public class ActividadPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        actTable = new javax.swing.JTable();
+        contTable = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        verBtn = new javax.swing.JButton();
-        jPanel6 = new javax.swing.JPanel();
-        filtratBtn = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
         CrearBtn = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        ModificarBtn = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
         borrarBtn = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
 
-        actTable.setModel(new javax.swing.table.DefaultTableModel(
+        contTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -70,63 +66,9 @@ public class ActividadPanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(actTable);
+        jScrollPane1.setViewportView(contTable);
 
         jPanel1.setLayout(new java.awt.GridLayout(5, 1));
-
-        verBtn.setText("Ver");
-        verBtn.setMargin(new java.awt.Insets(10, 5, 10, 5));
-        verBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                verBtnActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(verBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(verBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(jPanel2);
-
-        filtratBtn.setText("Filtrar");
-        filtratBtn.setMargin(new java.awt.Insets(10, 5, 10, 5));
-        filtratBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                filtratBtnActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(filtratBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(filtratBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(jPanel6);
 
         CrearBtn.setText("Crear");
         CrearBtn.setMargin(new java.awt.Insets(10, 5, 10, 5));
@@ -136,51 +78,24 @@ public class ActividadPanel extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
                 .addComponent(CrearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addGap(25, 25, 25))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
                 .addComponent(CrearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel3);
-
-        ModificarBtn.setText("Modificar");
-        ModificarBtn.setMargin(new java.awt.Insets(10, 5, 10, 5));
-        ModificarBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ModificarBtnActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(ModificarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(ModificarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(jPanel4);
+        jPanel1.add(jPanel2);
 
         borrarBtn.setText("Borrar");
         borrarBtn.setMargin(new java.awt.Insets(10, 5, 10, 5));
@@ -190,21 +105,60 @@ public class ActividadPanel extends javax.swing.JPanel {
             }
         });
 
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addComponent(borrarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(borrarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel6);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 180, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 128, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel3);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 180, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 128, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel4);
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(borrarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+            .addGap(0, 180, Short.MAX_VALUE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(borrarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+            .addGap(0, 128, Short.MAX_VALUE)
         );
 
         jPanel1.add(jPanel5);
@@ -231,27 +185,30 @@ public class ActividadPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void verBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verBtnActionPerformed
+    private void llenarTabla(){
+        limpiarTabla();
+        lista = AdopcionService.getAllAdopcion();
+        for (Adopcion adop: lista) {
+            tableModel.agregarAdop(adop.adopcionId(), adop.nombreAnimal(), Util.formatFecha(adop.fecha()), adop.precio());
+        }
+    }
 
-    }//GEN-LAST:event_verBtnActionPerformed
-
-    private void filtratBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtratBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_filtratBtnActionPerformed
-
+    private static void limpiarTabla(){
+        int cantFil = tableModel.getRowCount()-1;
+        for(int i=cantFil ; i>=0 ; i--){
+            tableModel.removeRow(i);
+        }
+    }
+    
     private void CrearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearBtnActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                CrearAct dialog = new CrearAct(new javax.swing.JFrame(), true);
+                ui.jdialogs.CrearContrato dialog = new CrearContrato(new javax.swing.JFrame(), true);
                 dialog.setVisible(true);
                 llenarTabla();
             }
         });
     }//GEN-LAST:event_CrearBtnActionPerformed
-
-    private void ModificarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarBtnActionPerformed
-
-    }//GEN-LAST:event_ModificarBtnActionPerformed
 
     private void borrarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarBtnActionPerformed
         /*if (contTable.getSelectedRow() != -1){
@@ -271,27 +228,11 @@ public class ActividadPanel extends javax.swing.JPanel {
         }*/
     }//GEN-LAST:event_borrarBtnActionPerformed
 
-    private void llenarTabla(){
-        limpiarTabla();
-        lista = ActividadService.getAllActividadTable();
-        for (ActividadTable act: lista) {
-            tableModel.agregarAct(act.actividadid(), Util.formatTimestamp(act.horario()), act.nombreAnimal(), act.servicioDesc(), act.descripcion());
-        }
-    }
-
-    private static void limpiarTabla(){
-        int cantFil = tableModel.getRowCount()-1;
-        for(int i=cantFil ; i>=0 ; i--){
-            tableModel.removeRow(i);
-        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CrearBtn;
-    private javax.swing.JButton ModificarBtn;
-    private javax.swing.JTable actTable;
     private javax.swing.JButton borrarBtn;
-    private javax.swing.JButton filtratBtn;
+    private javax.swing.JTable contTable;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -299,6 +240,5 @@ public class ActividadPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton verBtn;
     // End of variables declaration//GEN-END:variables
 }

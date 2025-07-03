@@ -9,7 +9,7 @@ public class ActividadTableModel extends DefaultTableModel {
         this.setColumnIdentifiers(encabezado);
     }
 
-    public void agregarAlim(String id,String hor, String anim, String serv, String desc){
+    public void agregarAct(String id,String hor, String anim, String serv, String desc){
         Object[] row = new Object[]{id, hor, anim, serv, desc};
         addRow(row);
     }

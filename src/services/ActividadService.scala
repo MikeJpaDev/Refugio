@@ -66,7 +66,8 @@ object ActividadService {
               rs.getString("descripcion"),
               rs.getTimestamp("horario"),
               rs.getString("proveedor_id"),
-              rs.getString("nombre_proveedor")
+              rs.getString("nombre_proveedor"),
+              rs.getString("tipo_servicio")
             )
           }
           Utils.convertirScalaAJavaList(actividad.toList)
@@ -84,6 +85,7 @@ object ActividadService {
     }
   }
 
+  @throws(classOf[SQLException])
   def createActividad(
                        animalId: String,
                        servicioId: Int,

@@ -2,8 +2,11 @@ package UI.src.ui.utils;
 
 import javax.swing.*;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.regex.Pattern;
 
@@ -96,5 +99,10 @@ public class Util {
         }
         fechaUtil.setTime(fechaUtil.getTime() - fechaUtil.getTime() % (24 * 60 * 60 * 1000));
         return new java.sql.Date(fechaUtil.getTime());
+    }
+    public static String formatTimestamp(Timestamp timestamp) {
+        LocalDateTime ldt = timestamp.toLocalDateTime();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return ldt.format(formatter);
     }
 }

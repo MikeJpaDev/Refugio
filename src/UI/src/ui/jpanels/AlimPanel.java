@@ -22,11 +22,25 @@ public class AlimPanel extends javax.swing.JPanel {
     private static AlimTableModel tableModel;
     private List<ProveedorAlimento> lista;
     
-    public AlimPanel() {
+    public AlimPanel(int seguridad) {
         initComponents();
         tableModel = new AlimTableModel();
         llenarTabla();
         alimTable.setModel(tableModel);
+        if (seguridad == 0){
+            crearBtn.disable();
+            crearBtn.setEnabled(false);
+            modificarBtn.disable();
+            modificarBtn.setEnabled(false);
+            borrarBtn.disable();
+            borrarBtn.setEnabled(false);
+        }
+        else if (seguridad == 2){
+            modificarBtn.disable();
+            modificarBtn.setEnabled(false);
+            borrarBtn.disable();
+            borrarBtn.setEnabled(false);
+        }
     }
 
     /**
@@ -46,9 +60,9 @@ public class AlimPanel extends javax.swing.JPanel {
         jPanel6 = new javax.swing.JPanel();
         filtratBtn = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        CrearBtn = new javax.swing.JButton();
+        crearBtn = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        ModificarBtn = new javax.swing.JButton();
+        modificarBtn = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         borrarBtn = new javax.swing.JButton();
 
@@ -123,11 +137,11 @@ public class AlimPanel extends javax.swing.JPanel {
 
         jPanel1.add(jPanel6);
 
-        CrearBtn.setText("Crear");
-        CrearBtn.setMargin(new java.awt.Insets(10, 5, 10, 5));
-        CrearBtn.addActionListener(new java.awt.event.ActionListener() {
+        crearBtn.setText("Crear");
+        crearBtn.setMargin(new java.awt.Insets(10, 5, 10, 5));
+        crearBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CrearBtnActionPerformed(evt);
+                crearBtnActionPerformed(evt);
             }
         });
 
@@ -137,24 +151,24 @@ public class AlimPanel extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(28, Short.MAX_VALUE)
-                .addComponent(CrearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(crearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addComponent(CrearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(crearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel3);
 
-        ModificarBtn.setText("Modificar");
-        ModificarBtn.setMargin(new java.awt.Insets(10, 5, 10, 5));
-        ModificarBtn.addActionListener(new java.awt.event.ActionListener() {
+        modificarBtn.setText("Modificar");
+        modificarBtn.setMargin(new java.awt.Insets(10, 5, 10, 5));
+        modificarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ModificarBtnActionPerformed(evt);
+                modificarBtnActionPerformed(evt);
             }
         });
 
@@ -164,14 +178,14 @@ public class AlimPanel extends javax.swing.JPanel {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(ModificarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(modificarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addComponent(ModificarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(modificarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
@@ -213,7 +227,7 @@ public class AlimPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 762, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,7 +236,7 @@ public class AlimPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -234,7 +248,7 @@ public class AlimPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_filtratBtnActionPerformed
 
-    private void CrearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearBtnActionPerformed
+    private void crearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearBtnActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 ui.jdialogs.CrearAliment dialog = new ui.jdialogs.CrearAliment(new javax.swing.JFrame(), true);
@@ -242,11 +256,11 @@ public class AlimPanel extends javax.swing.JPanel {
                 llenarTabla();
             }
         });
-    }//GEN-LAST:event_CrearBtnActionPerformed
+    }//GEN-LAST:event_crearBtnActionPerformed
 
-    private void ModificarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarBtnActionPerformed
+    private void modificarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarBtnActionPerformed
 
-    }//GEN-LAST:event_ModificarBtnActionPerformed
+    }//GEN-LAST:event_modificarBtnActionPerformed
 
     private void borrarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarBtnActionPerformed
         if (alimTable.getSelectedRow() != -1){
@@ -282,10 +296,9 @@ public class AlimPanel extends javax.swing.JPanel {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CrearBtn;
-    private javax.swing.JButton ModificarBtn;
     private javax.swing.JTable alimTable;
     private javax.swing.JButton borrarBtn;
+    private javax.swing.JButton crearBtn;
     private javax.swing.JButton filtratBtn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -294,6 +307,7 @@ public class AlimPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton modificarBtn;
     private javax.swing.JButton verBtn;
     // End of variables declaration//GEN-END:variables
 }

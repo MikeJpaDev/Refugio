@@ -49,6 +49,44 @@ object AnimalService {
     }
   }
 
+  def getAllAnimalActivo: java.util.List[Animal] = {
+    try {
+      DatabaseConnection.withConnection { conn =>
+        var stmt: Statement = null
+        var rs: ResultSet = null
+
+        try {
+          stmt = conn.createStatement()
+          rs = stmt.executeQuery(
+            "SELECT * FROM v_animal_activo;"
+          )
+
+          val animales = new scala.collection.mutable.ListBuffer[Animal]()
+          while (rs.next()) {
+            animales += Animal(
+              rs.getString("animal_id"),
+              rs.getString("nombre_animal"),
+              rs.getString("especie_nombre"),
+              rs.getString("raza"),
+              rs.getDate("fecha_nacimiento"),
+              rs.getDouble("peso_kg"),
+              rs.getDate("fecha_ingreso")
+            )
+          }
+          animales.toList.asJava
+        } finally {
+          if (rs != null) rs.close()
+          if (stmt != null) stmt.close()
+        }
+      }
+    } catch {
+      case e: SQLException =>
+        throw new SQLException(s"Error al obtener todos los animales: ${e.getMessage}", e)
+      case e: Exception =>
+        throw new Exception(s"Error inesperado al obtener animales: ${e.getMessage}", e)
+    }
+  }
+  
   @throws(classOf[SQLException])
   def createAnimal(
                     nombre_animal: String,
@@ -99,6 +137,8 @@ object AnimalService {
         throw new Exception(s"Error inesperado al crear animal: ${e.getMessage}", e)
     }
   }
+  
+  
 
   def updateAnimal(
                     animal: Animal,

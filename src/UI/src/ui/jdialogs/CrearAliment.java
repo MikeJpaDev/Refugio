@@ -59,7 +59,6 @@ public class CrearAliment extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
         jPanel1.setForeground(new java.awt.Color(102, 102, 255));
 
         jLabel4.setText("Email:");
@@ -90,7 +89,6 @@ public class CrearAliment extends javax.swing.JDialog {
 
         jLabel6.setText("Responsable:");
 
-        cancelarBtn.setBackground(new java.awt.Color(51, 51, 255));
         cancelarBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cancelarBtn.setText("Cancelar");
         cancelarBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -99,7 +97,6 @@ public class CrearAliment extends javax.swing.JDialog {
             }
         });
 
-        aceptarBtn.setBackground(new java.awt.Color(51, 51, 255));
         aceptarBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         aceptarBtn.setText("Aceptar");
         aceptarBtn.addActionListener(new java.awt.event.ActionListener() {

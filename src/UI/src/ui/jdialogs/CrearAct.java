@@ -7,9 +7,18 @@ package ui.jdialogs;
 import UI.src.ui.utils.Util;
 import models.Animal;
 import models.Servicio;
+import services.ActividadService;
+import services.AnimalService;
 
+import javax.swing.*;
+import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  *
@@ -60,6 +69,9 @@ public class CrearAct extends javax.swing.JDialog {
         descTxt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Crear Actividad");
+        setModal(true);
+        setResizable(false);
 
         jLabel4.setText("Fecha:");
 
@@ -77,15 +89,15 @@ public class CrearAct extends javax.swing.JDialog {
             }
         });
 
-        segJspinner.setModel(new javax.swing.SpinnerNumberModel(1.0d, 1.0d, null, 0.5d));
+        segJspinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 60, 1));
 
         jLabel9.setText("Segundos");
 
-        minJspinner.setModel(new javax.swing.SpinnerNumberModel(1.0d, 1.0d, null, 0.5d));
+        minJspinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 60, 1));
 
         jLabel8.setText("Minutos:");
 
-        horaJspinner.setModel(new javax.swing.SpinnerNumberModel(1.0d, 1.0d, null, 0.5d));
+        horaJspinner.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
 
         jLabel7.setText("Hora:");
 
@@ -245,9 +257,10 @@ public class CrearAct extends javax.swing.JDialog {
             public void run() {
                 SelctFecha dialog = new SelctFecha(new javax.swing.JFrame(), true);
                 dialog.setVisible(true);
-                fecha = dialog.getFecha();
-                if(fecha != null)
-                fechaTxt.setText(Util.formatFecha(fecha));
+                Date fech = dialog.getFecha();
+                if(fech != null)
+                    fecha = fech;
+                    fechaTxt.setText(Util.formatFecha(fecha));
             }
         });
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -275,20 +288,51 @@ public class CrearAct extends javax.swing.JDialog {
     }//GEN-LAST:event_InicioBtn1ActionPerformed
 
     private void animBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_animBtnActionPerformed
-        // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                ui.jdialogs.SelectAnimal dialog = new ui.jdialogs.SelectAnimal(new javax.swing.JFrame(), true, AnimalService.getAllAnimalActivo());
+                dialog.setVisible(true);
+                Animal anim = dialog.getAnimal();
+                if (anim != null){
+                    animal = anim;
+                    animTxt.setText(animal.nombre_animal());
+                }
+            }
+        });
     }//GEN-LAST:event_animBtnActionPerformed
 
     private void aceptarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarBtnActionPerformed
-        /*try {
+        try {
             validarCampos();
-            String modalidad = modTxt.getText();
-            String veh = transporTxt.getText();
+            String desc = descTxt.toString();
 
             if (servTxt.getText().isEmpty() || servicio == null){
                 throw new IllegalArgumentException("Debe seleccionar un servicio");
             }
+            
+            if (animTxt.getText().isEmpty() || animTxt == null){
+                throw new IllegalArgumentException("Debe seleccionar un animal");
+            }
+            
+            if (fecha.after(new Date())){
+                throw new IllegalArgumentException("La fecha seleccionada no puede ser mayor a la actual");
+            }
 
-            TransporteService.createTransporte(veh, modalidad, servicio.servicioId());
+            int hour = (Integer) horaJspinner.getValue();
+            int minute = (Integer) minJspinner.getValue();
+            int second = (Integer) segJspinner.getValue();
+
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(fecha);
+            cal.set(Calendar.HOUR_OF_DAY, hour);
+            cal.set(Calendar.MINUTE, minute);
+            cal.set(Calendar.SECOND, second);
+            cal.set(Calendar.MILLISECOND, 0);
+            
+            timestamp = new Timestamp(cal.getTimeInMillis());
+
+            ActividadService.createActividad(animal.animal_id(), servicio.servicioId(), descTxt.getText(), timestamp);
+            
             this.hide();
             JOptionPane.showMessageDialog(null, "Creado Correctamente", "Creado Satisfactoriamente", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
@@ -300,9 +344,21 @@ public class CrearAct extends javax.swing.JDialog {
             String mensajeError = "Error de base de datos: ";
 
             JOptionPane.showMessageDialog(null, mensajeError, "Error de base de datos", JOptionPane.ERROR_MESSAGE);
-        }*/
+        }
     }//GEN-LAST:event_aceptarBtnActionPerformed
 
+    public boolean validarCampos() {
+        try {
+            
+            
+            
+            return true;
+
+        } catch (IllegalArgumentException e) {
+            throw e;
+        }
+    }
+    
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed

@@ -2,6 +2,8 @@ package ui.jframes;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+
+import ui.jpanels.*;
 import ui.jpanels.ActividadPanel;
 import ui.jpanels.AlimPanel;
 import ui.jpanels.AnimalPanel;
@@ -21,9 +23,9 @@ import ui.jpanels.VetPanel;
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Principal
-     */
+    public static int seguridad = 0;
+    private JPanel courrent = null;
+    
     public VentanaPrincipal() {
         initComponents();
         ContentPanel.setLayout(new CardLayout());
@@ -41,6 +43,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ContentPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
         ProvMenu = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -72,6 +77,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             ContentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 687, Short.MAX_VALUE)
         );
+
+        jMenu1.setText("Inicio");
+
+        jMenuItem5.setText("Iniciar Sección");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem5);
+
+        jMenuItem9.setText("Cerrar Sección");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem9);
+
+        jMenuBar1.add(jMenu1);
 
         ProvMenu.setText("Proveedor");
 
@@ -176,7 +201,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        cambiarPanel(new AlimPanel());
+        cambiarPanel(new AlimPanel(seguridad));
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -188,11 +213,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        // TODO add your handling code here:
+        cambiarPanel(new AdopcionPanel());
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        cambiarPanel(new AnimalPanel());
+        cambiarPanel(new AnimalPanel(seguridad));
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void transporteMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transporteMenuActionPerformed
@@ -203,11 +228,31 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         cambiarPanel(new ActividadPanel());
     }//GEN-LAST:event_actividadMenuActionPerformed
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                ui.jdialogs.IniciarSecion dialog = new ui.jdialogs.IniciarSecion(new javax.swing.JFrame(), true);
+                dialog.setVisible(true);
+                int acceso = dialog.getRole();
+                seguridad = acceso;
+                if (courrent != null)
+                    cambiarPanel(courrent);
+            }
+        });
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        seguridad = 0;
+        if (courrent != null)
+            cambiarPanel(courrent);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JPanel ContentPanel;
     javax.swing.JMenu ProvMenu;
     javax.swing.JMenuItem actividadMenu;
     javax.swing.JLabel jLabel1;
+    javax.swing.JMenu jMenu1;
     javax.swing.JMenu jMenu2;
     javax.swing.JMenu jMenu3;
     javax.swing.JMenu jMenu4;
@@ -216,13 +261,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     javax.swing.JMenuItem jMenuItem2;
     javax.swing.JMenuItem jMenuItem3;
     javax.swing.JMenuItem jMenuItem4;
+    javax.swing.JMenuItem jMenuItem5;
     javax.swing.JMenuItem jMenuItem6;
     javax.swing.JMenuItem jMenuItem7;
     javax.swing.JMenuItem jMenuItem8;
+    javax.swing.JMenuItem jMenuItem9;
     javax.swing.JMenuItem transporteMenu;
     // End of variables declaration//GEN-END:variables
 
     private void cambiarPanel(JPanel nuevoPanel){
+        courrent = nuevoPanel;
         ContentPanel.removeAll();
         ContentPanel.add(nuevoPanel);
         ContentPanel.revalidate();
