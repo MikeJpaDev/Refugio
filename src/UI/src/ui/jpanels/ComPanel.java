@@ -22,11 +22,25 @@ public class ComPanel extends javax.swing.JPanel {
     private static CompTableModel tableModel;
     private List<ProveedorComplementario> lista;
     
-    public ComPanel() {
+    public ComPanel(int seguridad) {
         initComponents();
         tableModel = new CompTableModel();
         llenarTabla();
         compTable.setModel(tableModel);
+        if (seguridad == 0){
+            CrearBtn.disable();
+            CrearBtn.setEnabled(false);
+            ModificarBtn.disable();
+            ModificarBtn.setEnabled(false);
+            borrarBtn.disable();
+            borrarBtn.setEnabled(false);
+        }
+        else if (seguridad == 2){
+            ModificarBtn.disable();
+            ModificarBtn.setEnabled(false);
+            borrarBtn.disable();
+            borrarBtn.setEnabled(false);
+        }
     }
 
     /**

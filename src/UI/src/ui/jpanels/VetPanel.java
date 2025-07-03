@@ -30,11 +30,25 @@ public class VetPanel extends javax.swing.JPanel {
     /**
      * Creates new form VetPanel
      */
-    public VetPanel() {
+    public VetPanel(int seguridad) {
         initComponents();
         tableModel = new VetTableModel();
         llenarTabla();
         vetTable.setModel(tableModel);
+        if (seguridad == 0){
+            CrearBtn.disable();
+            CrearBtn.setEnabled(false);
+            ModificarBtn.disable();
+            ModificarBtn.setEnabled(false);
+            borrarBtn.disable();
+            borrarBtn.setEnabled(false);
+        }
+        else if (seguridad == 2){
+            ModificarBtn.disable();
+            ModificarBtn.setEnabled(false);
+            borrarBtn.disable();
+            borrarBtn.setEnabled(false);
+        }
     }
 
     private void llenarTabla(){

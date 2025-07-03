@@ -1,8 +1,17 @@
 package ui.jframes;
 
 import java.awt.CardLayout;
-import javax.swing.JPanel;
+import java.util.List;
+import javax.swing.*;
 
+import UI.src.ui.GenPdf;
+import UI.src.ui.utils.ActividadTableModel;
+import UI.src.ui.utils.RepoVetTableModel;
+import UI.src.ui.utils.Util;
+import models.ActividadTable;
+import reports.ReportVets;
+import services.ActividadService;
+import services.Reportes;
 import ui.jpanels.*;
 import ui.jpanels.ActividadPanel;
 import ui.jpanels.AlimPanel;
@@ -59,6 +68,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         actividadMenu = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        vetRepo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema Refugio");
@@ -178,6 +188,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Reportes");
+
+        vetRepo.setText("Reporte Veterinarios");
+        vetRepo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vetRepoActionPerformed(evt);
+            }
+        });
+        jMenu3.add(vetRepo);
+
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -197,7 +216,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        cambiarPanel(new VetPanel());
+        cambiarPanel(new VetPanel(seguridad));
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -205,11 +224,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        cambiarPanel(new ComPanel());
+        cambiarPanel(new ComPanel(seguridad));
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        cambiarPanel(new ContratoPanel());
+        cambiarPanel(new ContratoPanel(seguridad));
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
@@ -221,11 +240,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void transporteMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transporteMenuActionPerformed
-        cambiarPanel(new TransportePanel());
+        cambiarPanel(new TransportePanel(seguridad));
     }//GEN-LAST:event_transporteMenuActionPerformed
 
     private void actividadMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actividadMenuActionPerformed
-        cambiarPanel(new ActividadPanel());
+        cambiarPanel(new ActividadPanel(seguridad));
     }//GEN-LAST:event_actividadMenuActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -247,6 +266,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             cambiarPanel(courrent);
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
+    private void vetRepoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vetRepoActionPerformed
+        try{
+            RepoVetTableModel tableModel = new RepoVetTableModel();
+            javax.swing.JTable actTable = new javax.swing.JTable();
+            actTable.setModel(tableModel);
+            List <ReportVets> lista = Reportes.getRepVet();
+            for (ReportVets act: lista) {
+                tableModel.agregarRepop(act.nombre_proveedor(),act.direccion(), act.provincia(), act.especialidad(), act.clinica(), Util.formatFecha(act.fechaInicio()), Util.formatFecha(act.fechaFin()), Util.formatFecha(act.fechaConc()), act.descripc());
+            }
+            GenPdf.exportTableToPDF(actTable, "Reporte_Vet.pdf");
+        }
+        catch (Exception e) {
+        e.printStackTrace();
+    }
+        
+    }//GEN-LAST:event_vetRepoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JPanel ContentPanel;
     javax.swing.JMenu ProvMenu;
@@ -267,6 +303,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     javax.swing.JMenuItem jMenuItem8;
     javax.swing.JMenuItem jMenuItem9;
     javax.swing.JMenuItem transporteMenu;
+    javax.swing.JMenuItem vetRepo;
     // End of variables declaration//GEN-END:variables
 
     private void cambiarPanel(JPanel nuevoPanel){

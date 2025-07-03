@@ -29,11 +29,25 @@ public class ActividadPanel extends javax.swing.JPanel {
     /**
      * Creates new form ActividadPanel
      */
-    public ActividadPanel() {
+    public ActividadPanel(int seguridad) {
         initComponents();
         tableModel = new ActividadTableModel();
         llenarTabla();
         actTable.setModel(tableModel);
+        if (seguridad == 0){
+            CrearBtn.disable();
+            CrearBtn.setEnabled(false);
+            ModificarBtn.disable();
+            ModificarBtn.setEnabled(false);
+            borrarBtn.disable();
+            borrarBtn.setEnabled(false);
+        }
+        else if (seguridad == 2){
+            ModificarBtn.disable();
+            ModificarBtn.setEnabled(false);
+            borrarBtn.disable();
+            borrarBtn.setEnabled(false);
+        }
     }
 
     /**

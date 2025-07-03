@@ -29,11 +29,25 @@ public class TransportePanel extends javax.swing.JPanel {
     /**
      * Creates new form TransportePanel
      */
-    public TransportePanel() {
+    public TransportePanel(int seguridad) {
         initComponents();
         tableModel = new TransporteTableModel();
         llenarTabla();
         tranTable.setModel(tableModel);
+        if (seguridad == 0){
+            CrearBtn.disable();
+            CrearBtn.setEnabled(false);
+            ModificarBtn.disable();
+            ModificarBtn.setEnabled(false);
+            borrarBtn.disable();
+            borrarBtn.setEnabled(false);
+        }
+        else if (seguridad == 2){
+            ModificarBtn.disable();
+            ModificarBtn.setEnabled(false);
+            borrarBtn.disable();
+            borrarBtn.setEnabled(false);
+        }
     }
 
     private void llenarTabla(){

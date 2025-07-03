@@ -4,6 +4,7 @@
  */
 package ui.jpanels;
 
+import UI.src.ui.GenPdf;
 import UI.src.ui.utils.CompTableModel;
 import UI.src.ui.utils.ContratoTableModel;
 import UI.src.ui.utils.Util;
@@ -27,11 +28,26 @@ public class ContratoPanel extends javax.swing.JPanel {
     private List<ContratoTable> lista;
     private static ContratoTableModel tableModel;
     
-    public ContratoPanel() {
+    public ContratoPanel(int seguridad) {
         initComponents();
         tableModel = new ContratoTableModel();
         llenarTabla();
         contTable.setModel(tableModel);
+        if (seguridad == 0){
+            CrearBtn.disable();
+            CrearBtn.setEnabled(false);
+            ModificarBtn.disable();
+            ModificarBtn.setEnabled(false);
+            borrarBtn.disable();
+            borrarBtn.setEnabled(false);
+        }
+        else if (seguridad == 2){
+            ModificarBtn.disable();
+            ModificarBtn.setEnabled(false);
+            borrarBtn.disable();
+            borrarBtn.setEnabled(false);
+        }
+        
     }
 
     private void llenarTabla(){
@@ -248,7 +264,12 @@ public class ContratoPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_verBtnActionPerformed
 
     private void filtratBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtratBtnActionPerformed
-        // TODO add your handling code here:
+        try {
+            GenPdf.exportTableToPDF(contTable, "tabla_exportada.pdf");
+            System.out.println("Tabla exportada exitosamente.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_filtratBtnActionPerformed
 
     private void CrearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearBtnActionPerformed
