@@ -8,9 +8,18 @@ import UI.src.ui.utils.AnimalTableModel;
 import UI.src.ui.utils.ServTableModel;
 import UI.src.ui.utils.Util;
 import models.Animal;
+import models.Contrato;
 import models.Proveedor;
 import services.AnimalService;
+import services.ContratoService;
+import services.ServicioService;
+import utils.Utils;
 
+import javax.swing.*;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 /**
@@ -85,7 +94,7 @@ public class CrearContrato extends javax.swing.JDialog {
             }
         });
 
-        jLabel2.setText("Descripción:");
+        jLabel2.setText("Tipo Servicio:");
 
         jLabel5.setText("Fecha Fin:");
 
@@ -194,33 +203,8 @@ public class CrearContrato extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cancelarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(158, 158, 158)
-                                .addComponent(aceptarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(aggBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(borrBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(62, 62, 62)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(fechaConcTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(concBtn))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -240,8 +224,34 @@ public class CrearContrato extends javax.swing.JDialog {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(provTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(InicioBtn1)))))))
-                .addContainerGap(14, Short.MAX_VALUE))
+                                        .addComponent(InicioBtn1))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jScrollPane1))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(fechaConcTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(concBtn)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cancelarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(158, 158, 158)
+                                .addComponent(aceptarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(aggBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(borrBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,12 +280,10 @@ public class CrearContrato extends javax.swing.JDialog {
                         .addComponent(fechaConcTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(concBtn)))
                 .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(49, 49, 49)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -283,11 +291,11 @@ public class CrearContrato extends javax.swing.JDialog {
                         .addComponent(aggBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(borrBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(54, 54, 54)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(aceptarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(17, 17, 17))
         );
 
         pack();
@@ -356,17 +364,21 @@ public class CrearContrato extends javax.swing.JDialog {
     }
 
     private void aceptarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarBtnActionPerformed
-        /*try {
+        try {
             validarCampos();
-            String nombre = nombreTxt.getText();
-            String direccion = dirTxt.getText();
-            String tel = telTxt.getText();
-            String email = emialTxt.getText();
-            int provincia = provincias.get(provCmb.getSelectedIndex()).id();
-            String comp = compTxt.getText();
-            String res = respTxt.getText();
+            String descripc = descrArea.getText().trim();
 
-            ProvComplementarioService.createComplementario(nombre, direccion, tel, email, provincia, res,comp );
+            Contrato contrato = ContratoService.createContrato(proveedor.proveedor_id(), Util.convertirFecha(fechaInic), Util.convertirFecha(fechaFin), Util.convertirFecha(fechaConc), descripc);
+
+            for (HashMap<String, String> map: lista) {
+                double precioBase = Double.parseDouble(map.get("precio"));
+                double recargo = Double.parseDouble(map.get("recarga"));
+                int duracion = Integer.parseInt(map.get("duracion"));
+                String descrip = map.get("descrip");
+                
+                ServicioService.createServicio(contrato.contratoId(), contrato.proveedorId(), precioBase, recargo, duracion, descrip);
+            }
+            
             this.hide();
             JOptionPane.showMessageDialog(null, "Creado Correctamente", "Creado Satisfactoriamente", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
@@ -376,16 +388,11 @@ public class CrearContrato extends javax.swing.JDialog {
         }
         catch (SQLException e1){
             String mensajeError = "Error de base de datos: ";
-
-            if (e1.getSQLState().equals("23505")) {
-                mensajeError += detectarCampoDuplicado(e1);
-            }
-            else {
-                mensajeError += e1.getMessage();
-            }
-
+            if (e1.getMessage().contains("El proveedor ya tiene un contrato activo"))
+                mensajeError += "El proveedor ya tiene un contrato activo";
             JOptionPane.showMessageDialog(null, mensajeError, "Error de base de datos", JOptionPane.ERROR_MESSAGE);
-        }*/
+            e1.printStackTrace();
+        }
     }//GEN-LAST:event_aceptarBtnActionPerformed
 
     private void cancelarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarBtnActionPerformed
@@ -460,6 +467,44 @@ public class CrearContrato extends javax.swing.JDialog {
         
     }
 
+    public boolean validarCampos() {
+        try {
+            if(provTxt.getText().isEmpty() || fechaConcTxt.getText().isEmpty() || fechaFinTxt.getText().isEmpty()
+            || fechaInicTxt.getText().isEmpty() || descrArea.getText().trim().isEmpty())
+                throw new IllegalArgumentException("Todos los campos son obligatorios");
+            if (servTable.getRowCount() == 0)
+                throw new IllegalArgumentException("El Contrato tiene que aunque sea tener un servicio");
+            if (fechaInic.after(fechaFin) || fechaInic.after(fechaConc))
+                throw new IllegalArgumentException("La fecha de inicio no puede ser despues de la fecha fin o la fecha de conciiación");
+            if (fechaConc.after(fechaFin))
+                throw new IllegalArgumentException("La fecha de conciliación no puede ser despues de la de fin");
+            if (fechaInic.before(new Date()))
+                throw new IllegalArgumentException("Las fechas no pueden ser antes de la actual");
+            
+            int diasMax = 0;
+            for (HashMap<String, String> map: lista) {
+                int dias = Integer.parseInt(map.get("duracion"));
+                if(diasMax < dias)
+                    diasMax = dias;
+            }
+
+            LocalDate fechaInicLocal = fechaInic.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate fechaFinLocal = fechaFin.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            
+            long dias = ChronoUnit.DAYS.between(fechaInicLocal, fechaFinLocal);
+
+            System.out.println(diasMax + " " + dias);
+            
+            if (diasMax > dias)
+                throw new IllegalArgumentException("Los dias de duración de los servicios no pueden ser mayor que los dias de duracion del contrato");
+
+            return true;
+
+        } catch (IllegalArgumentException e) {
+            throw e;
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton InicioBtn;
     private javax.swing.JButton InicioBtn1;

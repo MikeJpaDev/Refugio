@@ -1,6 +1,6 @@
 package services
-import models.Actividad
-import utils.DatabaseConnection
+import models.{Actividad, ActividadTable}
+import utils.{DatabaseConnection, Utils}
 
 import java.sql.{PreparedStatement, ResultSet, SQLException, Timestamp}
 import java.util.UUID
@@ -8,7 +8,7 @@ import scala.collection.mutable.ListBuffer
 import scala.util.Using
 
 object ActividadService {
-  def getAllActividad: List[Actividad] = {
+  def getAllActividad: java.util.List[Actividad] = {
     try {
       DatabaseConnection.withConnection{ conn =>
         val query = "SELECT * FROM v_actividad"
@@ -30,8 +30,47 @@ object ActividadService {
               rs.getTimestamp("horario")
             )
           }
-          actividad.toList
+          Utils.convertirScalaAJavaList(actividad.toList)
         }  finally {
+          if (rs != null) rs.close()
+          if (stmt != null) stmt.close()
+        }
+      }
+    }
+    catch {
+      case e: SQLException =>
+        throw new SQLException(s"Error obteniendo actividades: ${e.getMessage}", e)
+      case e: Exception =>
+        throw new Exception(s"Error inesperado obteniendo actividades: ${e.getMessage}", e)
+    }
+  }
+
+  def getAllActividadTable: java.util.List[ActividadTable] = {
+    try {
+      DatabaseConnection.withConnection { conn =>
+        val query = "SELECT * FROM v_actividad_prov"
+        var stmt: PreparedStatement = null
+        var rs: ResultSet = null
+
+        try {
+          stmt = conn.prepareStatement(query)
+          rs = stmt.executeQuery()
+
+          val actividad = new ListBuffer[ActividadTable]
+          while (rs.next()) {
+            actividad += ActividadTable(
+              rs.getString("actividad_id"),
+              rs.getString("nombre_animal"),
+              rs.getString("animal_id_fk"),
+              rs.getInt("servicio_id_fk"),
+              rs.getString("descripcion"),
+              rs.getTimestamp("horario"),
+              rs.getString("proveedor_id"),
+              rs.getString("nombre_proveedor")
+            )
+          }
+          Utils.convertirScalaAJavaList(actividad.toList)
+        } finally {
           if (rs != null) rs.close()
           if (stmt != null) stmt.close()
         }

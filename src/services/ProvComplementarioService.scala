@@ -116,9 +116,6 @@ object ProvComplementarioService {
           stmt.setString(8, tipoComplementario)
 
           val updatedRows = stmt.executeUpdate()
-          if (updatedRows == 0) {
-            throw new SQLException(s"No se encontró el proveedor complementario con ID $proveedorId para actualizar")
-          }
         } finally {
           if (stmt != null) stmt.close()
         }

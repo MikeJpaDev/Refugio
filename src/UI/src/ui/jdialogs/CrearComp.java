@@ -21,6 +21,8 @@ import java.util.regex.Pattern;
 public class CrearComp extends javax.swing.JDialog {
 
     private List<Provincia> provincias;
+    private boolean act = false;
+    private ProveedorComplementario complementario;
     
     /**
      * Creates new form CrearComp
@@ -30,6 +32,30 @@ public class CrearComp extends javax.swing.JDialog {
         initComponents();
         this.provincias = Utils.getAllProvincias();
         actualizarCmbProvincias();
+        act = false;
+    }
+
+    public CrearComp(java.awt.Frame parent, boolean modal, ProveedorComplementario complementario) {
+        super(parent, modal);
+        this.complementario = complementario;
+        initComponents();
+        this.provincias = Utils.getAllProvincias();
+        actualizarCmbProvincias();
+        nombreTxt.setText(complementario.nombre_proveedor());
+        dirTxt.setText(complementario.direccion());
+        telTxt.setText(complementario.telefono());
+        emialTxt.setText(complementario.email());
+        respTxt.setText(complementario.responsable());
+        compTxt.setText(complementario.tipo_complementario());
+        int pos = -1;
+        for (int i = 0; i < provincias.size(); i++) {
+            if (provincias.get(i).nombre().equals(complementario.provincia()))
+                pos = i;
+        }
+        provCmb.setSelectedIndex(pos);
+        nombreTxt.disable();
+        emialTxt.disable();
+        act = true;
     }
 
     /**
@@ -230,15 +256,25 @@ public class CrearComp extends javax.swing.JDialog {
             String comp = compTxt.getText();
             String res = respTxt.getText();
 
-            ProvComplementarioService.createComplementario(nombre, direccion, tel, email, provincia, res,comp );
-            this.hide();
-            JOptionPane.showMessageDialog(null, "Creado Correctamente", "Creado Satisfactoriamente", JOptionPane.INFORMATION_MESSAGE);
-            this.dispose();
+            if (!act){
+                ProvComplementarioService.createComplementario(nombre, direccion, tel, email, provincia, res,comp );
+                this.hide();
+                JOptionPane.showMessageDialog(null, "Creado Correctamente", "Creado Satisfactoriamente", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+            }
+            else {
+                ProvComplementarioService.updateComplementario(complementario.proveedor_id(),nombre, direccion, tel, email, provincia, res,comp );
+                this.hide();
+                JOptionPane.showMessageDialog(null, "Actualizado Correctamente", "Actualizado Satisfactoriamente", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
+            }
+            
         }
         catch (IllegalArgumentException e){
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error de validación", JOptionPane.ERROR_MESSAGE);
         }
         catch (SQLException e1){
+            e1.printStackTrace();
             String mensajeError = "Error de base de datos: ";
 
             if (e1.getSQLState().equals("23505")) {

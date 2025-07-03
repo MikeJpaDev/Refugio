@@ -4,32 +4,52 @@
  */
 package ui.jpanels;
 
-import UI.src.ui.utils.AlimTableModel;
-import UI.src.ui.utils.AnimalTableModel;
-import models.Animal;
-import models.ProveedorAlimento;
-import services.AnimalService;
-import services.ProvAlimentoService;
+import javax.swing.JOptionPane;
+
+import UI.src.ui.utils.ContratoTableModel;
+import UI.src.ui.utils.TransporteTableModel;
+import UI.src.ui.utils.Util;
+import models.ContratoTable;
+import models.TransporteTable;
+import services.ContratoService;
+import services.TransporteService;
+import ui.jdialogs.CrearTransporte;
+import ui.jdialogs.SelectServ;
 
 import java.util.List;
-import ui.jdialogs.CrearAnimal;
 
 /**
  *
  * @author pc8
  */
-public class AnimalPanel extends javax.swing.JPanel {
-    
-    private static AnimalTableModel tableModel;
-    private List<Animal> lista;
-    
-    public AnimalPanel() {
+public class TransportePanel extends javax.swing.JPanel {
+
+    private List<TransporteTable> lista;
+    private static TransporteTableModel tableModel;
+    /**
+     * Creates new form TransportePanel
+     */
+    public TransportePanel() {
         initComponents();
-        tableModel = new AnimalTableModel();
+        tableModel = new TransporteTableModel();
         llenarTabla();
-        animalTable.setModel(tableModel);
+        tranTable.setModel(tableModel);
     }
 
+    private void llenarTabla(){
+        limpiarTabla();
+        lista = TransporteService.getAllTransportesTable();
+        for (TransporteTable tra : lista) {
+            tableModel.agregarTransp(tra.transporteId(), tra.modalidadTransporte(), tra.vehiculo(), tra.servicioDesc());
+        }
+    }
+
+    private static void limpiarTabla(){
+        int cantFil = tableModel.getRowCount()-1;
+        for(int i=cantFil ; i>=0 ; i--){
+            tableModel.removeRow(i);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -40,7 +60,7 @@ public class AnimalPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        animalTable = new javax.swing.JTable();
+        tranTable = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         verBtn = new javax.swing.JButton();
@@ -53,7 +73,7 @@ public class AnimalPanel extends javax.swing.JPanel {
         jPanel5 = new javax.swing.JPanel();
         borrarBtn = new javax.swing.JButton();
 
-        animalTable.setModel(new javax.swing.table.DefaultTableModel(
+        tranTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -64,7 +84,7 @@ public class AnimalPanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(animalTable);
+        jScrollPane1.setViewportView(tranTable);
 
         jPanel1.setLayout(new java.awt.GridLayout(5, 1));
 
@@ -90,7 +110,7 @@ public class AnimalPanel extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(verBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2);
@@ -114,10 +134,10 @@ public class AnimalPanel extends javax.swing.JPanel {
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
                 .addComponent(filtratBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel6);
@@ -134,17 +154,17 @@ public class AnimalPanel extends javax.swing.JPanel {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addComponent(CrearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGap(24, 24, 24))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
                 .addComponent(CrearBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel3);
@@ -162,16 +182,16 @@ public class AnimalPanel extends javax.swing.JPanel {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(26, 26, 26)
                 .addComponent(ModificarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(36, 36, 36)
                 .addComponent(ModificarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel4);
@@ -189,16 +209,16 @@ public class AnimalPanel extends javax.swing.JPanel {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(26, 26, 26)
                 .addComponent(borrarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(36, 36, 36)
                 .addComponent(borrarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel5);
@@ -209,19 +229,19 @@ public class AnimalPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 762, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(180, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
-                .addContainerGap(127, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -236,7 +256,7 @@ public class AnimalPanel extends javax.swing.JPanel {
     private void CrearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearBtnActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                CrearAnimal dialog = new CrearAnimal(new javax.swing.JFrame(), true);
+                CrearTransporte dialog = new CrearTransporte(new javax.swing.JFrame(), true);
                 dialog.setVisible(true);
                 llenarTabla();
             }
@@ -244,33 +264,36 @@ public class AnimalPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_CrearBtnActionPerformed
 
     private void ModificarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarBtnActionPerformed
-
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                SelectServ dialog = new SelectServ(new javax.swing.JFrame(), true);
+                dialog.setVisible(true);
+            }
+        });
     }//GEN-LAST:event_ModificarBtnActionPerformed
 
     private void borrarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarBtnActionPerformed
-
+        /*if (tranTable.getSelectedRow() != -1){
+            try {
+                int respuesta = JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea Eliminar?", "Confirmación", JOptionPane.YES_NO_OPTION);
+                if (respuesta == JOptionPane.YES_OPTION){
+                    ContratoTable cont = lista.get(tranTable.getSelectedRow());
+                    ContratoService.deleteContrato(cont.contratoId(), cont.proveedorId());
+                    JOptionPane.showMessageDialog(null, "Se eliminó correctamente", "Eliminado", JOptionPane.INFORMATION_MESSAGE);
+                    llenarTabla();
+                }
+            }
+            catch (InternalError e){
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Error Fatal", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
+        }*/
     }//GEN-LAST:event_borrarBtnActionPerformed
 
-
-    private void llenarTabla(){
-        limpiarTabla();
-        lista = AnimalService.getAllAnimal();
-        for (Animal animal : lista) {
-            tableModel.agregarAnimal(animal.animal_id(), animal.nombre_animal(), animal.especie_nombre(), animal.raza());
-        }
-    }
-
-    private static void limpiarTabla(){
-        int cantFil = tableModel.getRowCount()-1;
-        for(int i=cantFil ; i>=0 ; i--){
-            tableModel.removeRow(i);
-        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CrearBtn;
     private javax.swing.JButton ModificarBtn;
-    private javax.swing.JTable animalTable;
     private javax.swing.JButton borrarBtn;
     private javax.swing.JButton filtratBtn;
     private javax.swing.JPanel jPanel1;
@@ -280,6 +303,7 @@ public class AnimalPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tranTable;
     private javax.swing.JButton verBtn;
     // End of variables declaration//GEN-END:variables
 }

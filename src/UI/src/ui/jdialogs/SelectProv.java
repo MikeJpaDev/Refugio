@@ -9,6 +9,7 @@ import UI.src.ui.utils.ProveedTableModel;
 import models.*;
 import services.AnimalService;
 import services.ProveedorService;
+import utils.Filters;
 
 import javax.swing.*;
 import java.util.List;
@@ -22,9 +23,20 @@ public class SelectProv extends javax.swing.JDialog {
     private List<Proveedor> lista;
     private static ProveedTableModel tableModel;
     private Proveedor proveedor = null;
+    private List<Proveedor> listaAux;
     
     public SelectProv(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        lista = ProveedorService.getAllProveedor();
+        initComponents();
+        tableModel = new ProveedTableModel();
+        llenarTabla();
+        provTable.setModel(tableModel);
+    }
+    
+    public SelectProv(java.awt.Frame parent, boolean modal, List<Proveedor> list) {
+        super(parent, modal);
+        lista = list;
         initComponents();
         tableModel = new ProveedTableModel();
         llenarTabla();
@@ -33,8 +45,8 @@ public class SelectProv extends javax.swing.JDialog {
 
     private void llenarTabla(){
         limpiarTabla();
-        lista = ProveedorService.getAllProveedor();
-        for (Proveedor prov : lista) {
+        listaAux = Filters.provFilter(lista, nombreTxt.getText(), "", "", "");
+        for (Proveedor prov : listaAux) {
             String tipo = "Desconocido";
             if(prov instanceof Veterinario)
                 tipo = "Veterinario";
@@ -83,6 +95,7 @@ public class SelectProv extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        provTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(provTable);
 
         jLabel1.setText("Nombre:");
@@ -161,14 +174,14 @@ public class SelectProv extends javax.swing.JDialog {
     }//GEN-LAST:event_nombreTxtActionPerformed
 
     private void buscarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarBtnActionPerformed
-        // TODO add your handling code here:
+        llenarTabla();
     }//GEN-LAST:event_buscarBtnActionPerformed
 
     private void aceptarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aceptarBtnActionPerformed
         if (provTable.getSelectedRow() == -1)
             JOptionPane.showMessageDialog(null, "Seleccione un Proveedor", "Información", JOptionPane.INFORMATION_MESSAGE);
         else{
-            proveedor = lista.get(provTable.getSelectedRow());
+            proveedor = listaAux.get(provTable.getSelectedRow());
             this.dispose();
         }
     }//GEN-LAST:event_aceptarBtnActionPerformed

@@ -1,6 +1,6 @@
 package services
 import models.Servicio
-import utils.DatabaseConnection
+import utils.{DatabaseConnection, Utils}
 
 import java.sql.{CallableStatement, PreparedStatement, ResultSet, SQLException}
 import java.util.UUID
@@ -43,6 +43,7 @@ object ServicioService {
     }
   }
 
+  @throws(classOf[SQLException])
   def createServicio(
                       contratoId: Int,
                       proveedorId: String,
@@ -203,7 +204,7 @@ object ServicioService {
     }
   }
 
-  def getAllServicioByContrato(contratoId: Int, proveedorId: String): List[Servicio] = {
+  def getAllServicioByContrato(contratoId: Int, proveedorId: String): java.util.List[Servicio] = {
     try {
       val uuid = UUID.fromString(proveedorId)
       DatabaseConnection.withConnection { conn =>
@@ -229,7 +230,7 @@ object ServicioService {
               rs.getString("tipo_servicio")
             )
           }
-          servicios.toList
+          Utils.convertirScalaAJavaList(servicios.toList)
         } finally {
           if (rs != null) rs.close()
           if (stmt != null) stmt.close()

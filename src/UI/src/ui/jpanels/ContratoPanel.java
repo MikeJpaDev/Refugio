@@ -16,6 +16,7 @@ import services.ProvComplementarioService;
 import javax.swing.*;
 import java.util.List;
 import ui.jdialogs.CrearContrato;
+import ui.jdialogs.SelectServ;
 
 /**
  *
@@ -238,7 +239,7 @@ public class ContratoPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -261,7 +262,7 @@ public class ContratoPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_CrearBtnActionPerformed
 
     private void ModificarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarBtnActionPerformed
-
+        
     }//GEN-LAST:event_ModificarBtnActionPerformed
 
     private void borrarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarBtnActionPerformed

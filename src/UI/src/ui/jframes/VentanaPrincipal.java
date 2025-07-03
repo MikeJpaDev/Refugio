@@ -2,10 +2,12 @@ package ui.jframes;
 
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import ui.jpanels.ActividadPanel;
 import ui.jpanels.AlimPanel;
 import ui.jpanels.AnimalPanel;
 import ui.jpanels.ComPanel;
 import ui.jpanels.ContratoPanel;
+import ui.jpanels.TransportePanel;
 import ui.jpanels.VetPanel;
 
 /*
@@ -44,11 +46,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        transporteMenu = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        actividadMenu = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -103,6 +107,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         ProvMenu.add(jMenuItem4);
 
+        transporteMenu.setText("Transporte");
+        transporteMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                transporteMenuActionPerformed(evt);
+            }
+        });
+        ProvMenu.add(transporteMenu);
+
         jMenuBar1.add(ProvMenu);
 
         jMenu4.setText("Animal");
@@ -129,6 +141,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu4);
 
         jMenu2.setText("Actividades");
+
+        actividadMenu.setText("Ver Actividades");
+        actividadMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actividadMenuActionPerformed(evt);
+            }
+        });
+        jMenu2.add(actividadMenu);
+
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Reportes");
@@ -174,9 +195,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         cambiarPanel(new AnimalPanel());
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+    private void transporteMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_transporteMenuActionPerformed
+        cambiarPanel(new TransportePanel());
+    }//GEN-LAST:event_transporteMenuActionPerformed
+
+    private void actividadMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actividadMenuActionPerformed
+        cambiarPanel(new ActividadPanel());
+    }//GEN-LAST:event_actividadMenuActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JPanel ContentPanel;
     javax.swing.JMenu ProvMenu;
+    javax.swing.JMenuItem actividadMenu;
     javax.swing.JLabel jLabel1;
     javax.swing.JMenu jMenu2;
     javax.swing.JMenu jMenu3;
@@ -189,6 +219,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     javax.swing.JMenuItem jMenuItem6;
     javax.swing.JMenuItem jMenuItem7;
     javax.swing.JMenuItem jMenuItem8;
+    javax.swing.JMenuItem transporteMenu;
     // End of variables declaration//GEN-END:variables
 
     private void cambiarPanel(JPanel nuevoPanel){

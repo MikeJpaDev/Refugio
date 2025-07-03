@@ -243,7 +243,15 @@ public class ComPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_CrearBtnActionPerformed
 
     private void ModificarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarBtnActionPerformed
-
+        if (compTable.getSelectedRow() != -1){
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    CrearComp dialog = new CrearComp(new javax.swing.JFrame(), true, lista.get(compTable.getSelectedRow()));
+                    dialog.setVisible(true);
+                    llenarTabla();
+                }
+            });
+        }
     }//GEN-LAST:event_ModificarBtnActionPerformed
 
     private void borrarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrarBtnActionPerformed
